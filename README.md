@@ -168,7 +168,7 @@ GET `/api/ranking`
 
 - Table `lines` - contains lines; identified by id; fields: (id, name, color)
 - Table `stations` - contains stations; identified by id; fields: (id, name)
-- Table `line_stations` - bridge table used to represent stations inside a specific line; identified by (id, line_id, station_id); fields: (id, line_id, station_id, position)
+- Table `line_stations` - bridge table used to represent stations inside a specific line; identified by (line_id, station_id); fields: (line_id, station_id, position)
 - Table `events` - contains events applied to routes; identified by id; fields: (id, description, effect)
 - Table `users` - contains user data; identified by id; fields: (id, username, password (hashed), salt (for hashing a password), best_score)
 
