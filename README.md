@@ -1,12 +1,14 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/iZes9Qfg)
 # Exam #1: "Ultima corsa"
-## Student: s123456 LASTNAME FIRSTNAME 
+## Student: s358440 TALLONE STEFANO 
 
 ## React Client Application Routes
 
-- Route `/`: page content and purpose
-- Route `/something/:param`: page content and purpose, param specification
-- ...
+- Route `/`: landing page  with game instructions, visible to all users (including anonymous). Contains a link to the login page.
+- Route `/login`: login form. Redirects to `/map` on success.
+- Route `/map`: setup phase. Shows the full metro network map with lines, stations and connections. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/game`: planning, execution and result phases. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/ranking`: ranking board showing all users and their best score, ordered by best score descending. Only accessible to authenticated users, otherwise redirects to `/`.
 
 ## API Server
 
