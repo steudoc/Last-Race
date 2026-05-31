@@ -12,7 +12,6 @@
 
 ### Auth
 - GET `/api/session/current`
-  - retrieve user information
   - request parameters: cookie for passport authentication
   - response body: user info associated with current session
   - response status: 
@@ -26,13 +25,141 @@
       username: 'steudoc'
     }
 - POST `/api/session`
-  - login
   - request parameters: none
   - request body: credentials { username, password }
   - response body: user info associated with the new session
-  - response
+  - response status:
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    {
+      id: 1,
+      username: 'steudoc'
+    }
 - DELETE `/api/session/current`
-  - logout
+  - request parameters: cookie for passport authentication
+  - response body: none,
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+
+### Static data
+- GET `/api/lines`
+  - request parameters: cookie for passport authentication
+  - response body: list of all lines with their ordered stations
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    [
+      {
+        id: 1,
+        name: 'Blue Line',
+        color: 'blue',
+        stations: [
+          { id: 1, name: 'Torino', position: 1 },
+          { id: 2, name: 'Carmagnola', position: 2 },
+          ...
+        ]
+      },
+      ...
+    ]
+- GET `/api/stations`
+  - request parameters: cookie for passport authentication
+  - response body: list of all stations
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    [
+      { id: 1, name: 'Torino', position: 1 },
+      { id: 2, name: 'Carmagnola', position: 2 },
+      ...
+    ]
+- GET `/api/connections`
+  - request parameters: cookie for passport authentication
+  - response body: list of all connections (pairs of adjacent stations on the same line)
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    [
+      {
+        fromId: 1,
+        fromName: 'Torino',
+        toId: 2,
+        toName: 'Carmagnola'
+      },
+      ...
+    ]
+### Game 
+GET `/api/game/start`
+  - request parameters: cookie for passport authentication
+  - response body: randomly assigned start and end stations (min distance: 3 stops)
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    {
+      startStation: { id: 3, name: 'Cavallermaggiore' },
+      endStation: { id: 9, name: 'Ceva' }
+    }
+POST `/api/game/execute`
+  - request parameters: cookie for passport authentication
+  - request body:
+    ```
+    {
+      connections: [
+        { fromId: 3, toId: 4 },
+        { fromId: 4, toId: 5 },
+        ...
+      ]
+    }
+    ```
+  - response body: validation result and, if valid, list of connections with their random events and running coin total; if invalid, score is 0
+  - response status: 
+    - 200 OK
+    - 401 Unauthorized
+    - 422 Unprocessable Content
+    - 500 Internal Server Error
+  - response body example (in case of success, valid route): 
+    ```
+    {
+      valid: true,
+      finalScore: 17,
+      connections: [
+        { fromName: 'Cavallermaggiore', toName: 'Savigliano', event: 'Viaggio tranquillo', effect: 0, coinsAfter: 20 },
+        { fromName: 'Savigliano', toName: 'Fossano', event: 'Binario sbagliato', effect: -2, coinsAfter: 18 },
+        ...
+      ]
+    }
+### Ranking
+GET `/api/ranking`
+  - request parameters: cookie for passport authentication
+  - response body: list of all users with their best score, ordered by best score descending
+  - response status:
+    - 200 OK
+    - 401 Unauthorized
+    - 500 Internal Server Error
+  - response body example (in case of success): 
+    ```
+    [
+      { username: 'mario.rossi', bestScore: 24 },
+      { username: 'luigi.bianchi', bestScore: 18 },
+      ...
+    ]
+    ```
 
 
 ## Database Tables
