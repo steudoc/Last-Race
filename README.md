@@ -190,8 +190,16 @@ GET `/api/ranking`
 
 ## Users Credentials
 
-- username, password (plus any other requested info)
-- username, password (plus any other requested info)
+| Username      | Password |
+| :------------ | :------- |
+| steudoc       | password |
+| mario.rossi   | password |
+| luigi.bianchi | password |
+| osv           | password |
+| SimplePlayer  | password |
+| john.doe      | password |
+| julia         | password |
+| Silve         | password |
 
 ## Use of AI Tools
 Briefly describe whether you used any AI tools (e.g., ChatGPT, GitHub Copilot, Claude) while working on this project, for which purposes (e.g., clarifying concepts, debugging, generating code), and how you verified or adapted their output.
