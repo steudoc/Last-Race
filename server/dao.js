@@ -100,7 +100,7 @@ export const getRandomGameStations = () => {
                 if (!graph[conn.id1]) 
                     graph[conn.id1] = [];
                 if (!graph[conn.id2])
-                    graph[row.id2] = [];
+                    graph[conn.id2] = [];
                 graph[conn.id1].push(conn.id2);
                 graph[conn.id2].push(conn.id1); //bidirectional
             }
@@ -110,7 +110,7 @@ export const getRandomGameStations = () => {
             const validPairs = [];
             for (let i = 0; i < stationIds.length; i++) {
                 for (let j = i + 1; j < stationIds.length; j++) {
-                    const dist = bfs(stationIds[i], stationIds[j]);
+                    const dist = bfs(stationIds[i], stationIds[j], graph);
                     if (dist >= 3) {
                         validPairs.push({
                             startId: stationIds[i],
@@ -151,7 +151,11 @@ export const getEvents = () => {
 
 export const updateBestScore = (userId, score) => {
     return new Promise((resolve, reject) => {
-        const sql = "UPDATE users SET best_score = ? WHERE id = ? AND best_score < ?";
+        const sql = `
+            UPDATE users 
+            SET best_score = ? 
+            WHERE id = ? AND (best_score < ? OR best_score IS NULL)
+        `;
         db.run(sql, [score, userId, score], (err) => {
             if(err) 
                 reject(err);

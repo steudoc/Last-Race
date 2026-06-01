@@ -69,7 +69,7 @@ app.get("/api/lines", isLoggedIn, async (req, res) => {
     const lines = await getLines();
     res.json(lines);
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -79,7 +79,7 @@ app.get("/api/stations", isLoggedIn, async (req, res) => {
     const stations = await getStations();
     res.json(stations);
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -89,7 +89,7 @@ app.get("/api/connections", isLoggedIn, async (req, res) => {
     const connections = await getConnections();
     res.json(connections);
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -99,7 +99,7 @@ app.get("/api/game/start", isLoggedIn, async (req, res) => {
     const { startStation, endStation } = await getRandomGameStations();
     res.json({ startStation, endStation });
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -114,10 +114,12 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
 
   try {
     const events = await getEvents();
+    const validConnections = await getConnections();
 
     // check if sumbmitted route is valid
-    const isValid = validateRoute(connections, startId, endId);
+    const isValid = validateRoute(connections, startId, endId, validConnections);
     if (!isValid) {
+      await updateBestScore(req.user.id, 0);
       return res.json({ valid: false, finalScore: 0 });
     }
 
@@ -139,7 +141,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
     return res.json({ valid: true, finalScore: coins, connections: result });
 
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -149,7 +151,7 @@ app.get("/api/ranking", async (req, res) => {
     const ranking = await getRanking();
     res.json(ranking);
   } catch(err) {
-    res.status(500).end();
+    res.status(500).json({ error: err.message });
   }
 });
 
