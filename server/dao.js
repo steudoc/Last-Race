@@ -217,3 +217,18 @@ export const getUser = (username, password) => {
         });
     });
 }
+
+export const getUserById = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT id, username, best_score FROM users WHERE id = ?";
+        db.get(sql, [id], (err, row) => {
+            if (err)
+                reject(err);
+            else if (!row) {
+                resolve(null);
+            } else {
+                resolve(row);
+            }
+        });
+    });
+}
