@@ -63,6 +63,8 @@ const corsOption = {
 
 app.use(cors(corsOption));
 
+// ROUTES
+
 // GET /api/lines
 app.get("/api/lines", isLoggedIn, async (req, res) => {
   try {
@@ -146,7 +148,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
 });
 
 // GET /api/ranking
-app.get("/api/ranking", async (req, res) => {
+app.get("/api/ranking", isLoggedIn, async (req, res) => {
   try {
     const ranking = await getRanking();
     res.json(ranking);
@@ -154,8 +156,6 @@ app.get("/api/ranking", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// ROUTES
 
 // GET /api/sessions/current
 app.get("/api/sessions/current", (req, res) => {
