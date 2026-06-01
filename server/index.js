@@ -1,7 +1,8 @@
 // imports
 import express from "express";
 import morgan from "morgan";
-import { getLines, getStations, getUser, getUserById } from "./dao.js";
+import { getConnections, getEvents, getLines, getRandomGameStations, getRanking, getStations, getUser, getUserById, updateBestScore } from "./dao.js";
+import { validateRoute } from "./utils.js";
 import { check, validationResult } from "express-validator";
 import session from 'express-session';
 
@@ -68,7 +69,7 @@ app.get("/api/lines", isLoggedIn, async (req, res) => {
     const lines = await getLines();
     res.json(lines);
   } catch(err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).end();
   }
 });
 
@@ -78,29 +79,97 @@ app.get("/api/stations", isLoggedIn, async (req, res) => {
     const stations = await getStations();
     res.json(stations);
   } catch(err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).end();
   }
 });
 
-//
+// GET /api/connections
+app.get("/api/connections", isLoggedIn, async (req, res) => {
+  try {
+    const connections = await getConnections();
+    res.json(connections);
+  } catch(err) {
+    res.status(500).end();
+  }
+});
+
+// GET /api/game/start
+app.get("/api/game/start", isLoggedIn, async (req, res) => {
+  try {
+    const { startStation, endStation } = await getRandomGameStations();
+    res.json({ startStation, endStation });
+  } catch(err) {
+    res.status(500).end();
+  }
+});
+
+// POST /api/game/execute
+app.post("/api/game/execute", isLoggedIn, async (req, res) => {
+  const { connections, startId, endId } = req.body;
+
+  // data validation
+  if (!connections || !Array.isArray(connections) || connections.length === 0 || !startId || !endId) {
+    return res.status(422).json({ error: "Invalid request body" });
+  } 
+
+  try {
+    const events = await getEvents();
+
+    // check if sumbmitted route is valid
+    const isValid = validateRoute(connections, startId, endId);
+    if (!isValid) {
+      return res.json({ valid: false, finalScore: 0 });
+    }
+
+    // apply random events
+    let coins = 20;
+    const result = connections.map(conn => {
+      const event = events[Math.floor(Math.random() * events.length)];
+      coins = Math.max(0, coins + event.effect);
+      return {
+        fromName: validConnections.find(c => c.id1 === conn.fromId)?.name1,
+        toName: validConnections.find(c => c.id2 === conn.toId)?.name2,
+        event: event.description,
+        effect: event.effect,
+        coinsAfter: coins,
+      };
+    });
+
+    await updateBestScore(req.user.id, coins);
+    return res.json({ valid: true, finalScore: coins, connections: result });
+
+  } catch(err) {
+    res.status(500).end();
+  }
+});
+
+// GET /api/ranking
+app.get("/api/ranking", async (req, res) => {
+  try {
+    const ranking = await getRanking();
+    res.json(ranking);
+  } catch(err) {
+    res.status(500).end();
+  }
+});
 
 // ROUTES
 
-// GET /api/session/current
-app.get("/api/session/current", (req, res) => {
+// GET /api/sessions/current
+app.get("/api/sessions/current", (req, res) => {
   if(req.isAuthenticated())
     res.json(req.user);
   else
     res.status(401).json({ error: "Unauthorized"});
 });
 
-// POST /api/session
-app.post("/api/session", passport.authenticate("local"), function(req, res) {
+// POST /api/sessions
+app.post("/api/sessions", passport.authenticate("local"), function(req, res) {
   return res.status(200).json(req.user);
 })
 
-// DELETE /api/session/current
-app.delete("/api/session/current", (req, res) => {
+// DELETE /api/sessions/current
+app.delete("/api/sessions/current", (req, res) => {
   req.logout(() => {
     res.end();
   });

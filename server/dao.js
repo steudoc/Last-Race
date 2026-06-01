@@ -3,6 +3,7 @@
 import sqlite from "sqlite3";
 import crypto from "crypto";
 import { Line, Station, Event } from './models.js'
+import { bfs } from "./utils.js";
 
 const db = new sqlite.Database("database.db", (err) => {
     if (err) throw err;
@@ -103,27 +104,6 @@ export const getRandomGameStations = () => {
                 graph[conn.id1].push(conn.id2);
                 graph[conn.id2].push(conn.id1); //bidirectional
             }
-
-            // bfs to find distance between two stations (ricerca in ampiezza)
-            const bfs = (start, end) => {
-                const visited = new Set();
-                const queue = [[start, 0]];
-                visited.add(start);
-
-                while (queue.length > 0) {
-                    const [node, dist] = queue.shift();
-                    if (node === end) 
-                        return dist;
-
-                    for (const neighbor of (graph[node] || [])) {
-                        if (!visited.has(neighbor)) {
-                            visited.add(neighbor);
-                            queue.push([neighbor, dist + 1]);
-                        }
-                    }
-                }
-                return Infinity;
-            };
 
             // find valid pairs (dist>3)
             const stationIds = Object.keys(graph).map(Number);

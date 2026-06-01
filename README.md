@@ -13,7 +13,7 @@
 ## API Server
 
 ### Auth
-- GET `/api/session/current`
+- GET `/api/sessions/current`
   - request parameters: cookie for passport authentication
   - response body: user info associated with current session
   - response status: 
@@ -26,7 +26,7 @@
       id: 1,
       username: 'steudoc'
     }
-- POST `/api/session`
+- POST `/api/sessions`
   - request parameters: none
   - request body: credentials { username, password }
   - response body: user info associated with the new session
@@ -40,7 +40,7 @@
       id: 1,
       username: 'steudoc'
     }
-- DELETE `/api/session/current`
+- DELETE `/api/sessions/current`
   - request parameters: cookie for passport authentication
   - response body: none,
   - response status: 
