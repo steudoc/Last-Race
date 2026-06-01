@@ -1,0 +1,71 @@
+###
+
+# LOGIN
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+    "username": "steudoc",
+    "password": "password"
+}
+
+###
+
+# VERIFY SESSION
+GET http://localhost:3001/api/sessions/current
+
+### 
+
+GET http://localhost:3001/api/lines
+
+###
+
+GET http://localhost:3001/api/stations
+
+###
+
+GET http://localhost:3001/api/connections
+
+###
+
+# START GAME
+GET http://localhost:3001/api/game/start
+
+###
+
+# EXECUTE VALID ROUTE
+POST http://localhost:3001/api/game/execute
+Content-Type: application/json
+
+{
+    "connections": [
+        { "fromId": 1, "toId": 2 },
+        { "fromId": 2, "toId": 3 },
+        { "fromId": 3, "toId": 4 }
+    ],
+    "startId": 1,
+    "endId": 4
+}
+
+###
+
+# EXECUTE INVALID ROUTE
+POST http://localhost:3001/api/game/execute
+Content-Type: application/json
+
+{
+    "connections": [
+        { "fromId": 1, "toId": 2 }
+    ],
+    "startId": 1,
+    "endId": 5
+}
+
+###
+
+GET http://localhost:3001/api/ranking
+
+###
+
+# LOGOUT
+DELETE http://localhost:3001/api/sessions/current

@@ -163,7 +163,7 @@ export const updateBestScore = (userId, score) => {
 
 export const getRanking = () => {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT id, username, best_score FROM users ORDER BY best_score DESC";
+        const sql = "SELECT id, username, best_score FROM users WHERE best_score >= 0 ORDER BY best_score DESC";
         db.all(sql, [], (err, rows) => {
             if (err)
                 reject(err);
