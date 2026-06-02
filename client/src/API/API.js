@@ -2,9 +2,72 @@ const SERVER_URL = "http://localhost:3001";
 
 // STATIC DATA
 
+const getLines = async () => {
+    const response = await fetch(SERVER_URL + "/api/lines", {
+        credentials: "include"
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
+
+const getStations = async () => {
+    const response = await fetch(SERVER_URL + "/api/stations", {
+        credentials: "include"
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
+
+const getConnections = async () => {
+    const response = await fetch(SERVER_URL + "/api/connections", {
+        credentials: "include"
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
+
 // GAME
 
+const startGame = async () => {
+    const response = await fetch(SERVER_URL + "/api/game/start", {
+        credentials: "include"
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
+
+const executeGame = async () => {
+    const response = await fetch(SERVER_URL + "/api/game/execute", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ connections, startId, endId })
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
+
 // RANKING
+
+const getRanking = async () => {
+    const response = await fetch(SERVER_URL + "/api/ranking", {
+        credentials: "include"
+    });
+    if (response.ok)
+        return await response.json();
+    else
+        throw await response.json();
+};
 
 // AUTH
 
@@ -42,3 +105,6 @@ const logOut = async () => {
     });
     if (response.ok) return null;
 };
+
+const API = { getLines, getStations, getConnections, startGame, executeGame, logIn, logOut, getUserInfo };
+export default API;
