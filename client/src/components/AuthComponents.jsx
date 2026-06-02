@@ -35,7 +35,7 @@ export function LoginForm(props) {
                         <Form.Label className="beach-form-label">Password</Form.Label>
                         <Form.Control type='password' name='password' required className="beach-form-input" />
                     </Form.Group>
-                    {/* messaggio d'errore in inserimento di credenziali (se presente) */}
+                    {/* error message (if present) */}
                     {state.error && <p className="text-danger">{state.error}</p>}
                     <div className="d-flex justify-content-center gap-2 mt-3">
                         <Button type='submit' className="beach-btn beach-login-btn" disabled={isPending}>Login</Button>

@@ -1,10 +1,19 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { Button, Container, Navbar, Nav } from "react-bootstrap";
-import API from "../API/API";
 import { LogoutButton } from "./AuthComponents";
+import { useEffect, useState } from "react";
 
 function NavHeader(props) {
-    const navigate = useNavigate();
+    const [darkMode, setDarkMode] = useState(false);
+
+    useEffect(() => {
+        // if darkMode === true, adds data-bs-theme to the html tag
+        if (darkMode)
+            document.documentElement.setAttribute("data-bs-theme","dark");
+        // otherwise, removes data-bs-theme
+        else
+            document.documentElement.removeAttribute("data-bs-theme");
+    }, [darkMode]);
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -17,6 +26,9 @@ function NavHeader(props) {
                         <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
                     </>}
                 </Nav>
+                <Button onClick={() => setDarkMode(oldMode => !oldMode)}>
+                    { darkMode ? <i className="bi bi-sun-fill" /> : <i className="bi bi-moon-fill" />}
+                </Button>
                 <Nav>
                     { props.loggedIn ? 
                         <LogoutButton handleLogout={props.handleLogout} /> :
