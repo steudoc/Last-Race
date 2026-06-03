@@ -106,5 +106,5 @@ const logOut = async () => {
     if (response.ok) return null;
 };
 
-const API = { getLines, getStations, getConnections, startGame, executeGame, logIn, logOut, getUserInfo };
+const API = { getLines, getStations, getConnections, getRanking, startGame, executeGame, logIn, logOut, getUserInfo };
 export default API;

@@ -20,26 +20,38 @@ export function LoginForm(props) {
     }
 
     return (
-        <div className="d-flex justify-content-center align-items-center beach-bg beach-login-bg">
-            <div className="beach-card beach-login-card">
-                <h2 className="text-center mb-4 beach-title">
-                    <span role="img" aria-label="passport"></span> Login
-                </h2>
-                { isPending && <Alert variant="warning">Please, wait for the server's response...</Alert> }
+        <div className="page-center page-enter">
+            <div className="metro-card login-page-card">
+                <div className="lines-row">
+                    <div className="line-chip line-blue"></div>
+                    <div className="line-chip line-red"></div>
+                    <div className="line-chip line-yellow"></div>
+                    <div className="line-chip line-purple"></div>
+                    <div className="line-chip line-green"></div>
+                    <div className="line-chip line-orange"></div>
+                </div>
+
+                <p className="eyebrow">Login</p>
+                <h2 className="login-title">All Aboard</h2>
+                <p className="login-subtitle">Enter your credentials to access the game</p>
+
+                {isPending && <Alert variant="warning" className="py-2">Connecting...</Alert>}
+                {state?.error && <Alert variant="danger" className="py-2">{state.error}</Alert>}
+
                 <Form action={formAction}>
-                    <Form.Group controlId='username' className='mb-3'>
-                        <Form.Label className="beach-form-label">Username</Form.Label>
-                        <Form.Control type='text' name='username' required className="beach-form-input" />      
+                    <Form.Group className="mb-3">
+                        <label className="label">Username</label>
+                        <Form.Control type="text" name="username" required className="metro-input" />
                     </Form.Group>
-                    <Form.Group controlId='password' className='mb-3'>
-                        <Form.Label className="beach-form-label">Password</Form.Label>
-                        <Form.Control type='password' name='password' required className="beach-form-input" />
+                    <Form.Group className="mb-4">
+                        <label className="label">Password</label>
+                        <Form.Control type="password" name="password" required className="metro-input" />
                     </Form.Group>
-                    {/* error message (if present) */}
-                    {state.error && <p className="text-danger">{state.error}</p>}
-                    <div className="d-flex justify-content-center gap-2 mt-3">
-                        <Button type='submit' className="beach-btn beach-login-btn" disabled={isPending}>Login</Button>
-                        <Link className='btn btn-outline-danger beach-btn' to={'/'} disabled={isPending}>Cancel</Link>
+                    <div className="d-flex gap-2">
+                        <button type="submit" className="btn-metro flex-grow-1" disabled={isPending}>
+                            Login
+                        </button>
+                        <Link className="btn-metro-outline" to="/">Cancel</Link>
                     </div>
                 </Form>
             </div>
@@ -48,5 +60,5 @@ export function LoginForm(props) {
 }
 
 export function LogoutButton(props) {
-    return <Button variant="outline-light" onClick={props.handleLogout}>Logout</Button>;
+    return <Button variant="metro-btn-outline btn-logout" onClick={props.handleLogout}>Logout</Button>;
 }
