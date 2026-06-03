@@ -4,8 +4,6 @@ function Home(props) {
     return (
         <div className="page-center page-enter">
             <div className="metro-card home-container">
-                
-                {/* HERO SECTION */}
                 <div className="home-hero d-flex justify-content-between align-items-center gap-4 mb-5 pb-4">
                     <div>
                         <p className="text-accent text-uppercase fw-bold small mb-1">Metro Network Game</p>
@@ -19,7 +17,7 @@ function Home(props) {
                         }
                     </div>
                     
-                    {/* Decorative Chromatic Metro Lines */}
+                    {/* cecorative metro lines */}
                     <div className="hero-lines d-flex flex-column d-none d-sm-flex">
                         <div className="hero-line line-purple" style={{ width: '40%' }}></div>
                         <div className="hero-line line-blue" style={{ width: '80%' }}></div>
@@ -30,7 +28,7 @@ function Home(props) {
                     </div>
                 </div>
 
-                {/* HOW TO PLAY SECTION */}
+                {/* HOW TO PLAY */}
                 <div className="mb-5">
                     <p className="text-accent text-uppercase fw-bold small mb-1">How to play</p>
                     <h2 className="mb-4">Four Gameplay Phases</h2>
@@ -70,7 +68,7 @@ function Home(props) {
                     </div>
                 </div>
 
-                {/* NETWORK PREVIEW SECTION */}
+                {/* NETWORK */}
                 <div className="mb-5">
                     <p className="text-accent text-uppercase fw-bold small mb-1">The Infrastructure</p>
                     <h2 className="mb-4">6 Active Lines, 26 Stations, 7 Interchanges</h2>
@@ -84,7 +82,7 @@ function Home(props) {
                     </div>
                 </div>
 
-                {/* BOTTOM CALL TO ACTION */}
+                {/* CALL TO ACTION */}
                 <div className="pt-2 border-top border-light-subtle text-center text-sm-start">
                     {props.loggedIn ? 
                         <Link to="/play" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Start Journey</Link> :

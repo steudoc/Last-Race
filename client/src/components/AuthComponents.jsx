@@ -20,8 +20,10 @@ export function LoginForm(props) {
     }
 
     return (
-        <div className="page-center page-enter">
+        <div className="page-center">
             <div className="metro-card login-page-card">
+                
+                {/* Decorative Rail lines */}
                 <div className="lines-row">
                     <div className="line-chip line-blue"></div>
                     <div className="line-chip line-red"></div>
@@ -31,23 +33,33 @@ export function LoginForm(props) {
                     <div className="line-chip line-orange"></div>
                 </div>
 
-                <p className="eyebrow">Login</p>
-                <h2 className="login-title">All Aboard</h2>
-                <p className="login-subtitle">Enter your credentials to access the game</p>
+                <p className="text-accent font-mono-custom small fw-bold text-uppercase mb-1">
+                    ALL ABOARD
+                </p>
+                <h2 className="login-title">Login</h2>
+                <p className="login-subtitle">Enter your credentials</p>
 
-                {isPending && <Alert variant="warning" className="py-2">Connecting...</Alert>}
-                {state?.error && <Alert variant="danger" className="py-2">{state.error}</Alert>}
+                {isPending && (
+                    <Alert className="metro-alert metro-alert-warning py-2">
+                        CONNECTING TO SERVER...
+                    </Alert>
+                )}
+                {state?.error && (
+                    <Alert className="metro-alert metro-alert-danger py-2">{state.error}</Alert>
+                )}
 
                 <Form action={formAction}>
                     <Form.Group className="mb-3">
-                        <label className="label">Username</label>
+                        <label className="metro-label">Username</label>
                         <Form.Control type="text" name="username" required className="metro-input" />
                     </Form.Group>
+                    
                     <Form.Group className="mb-4">
-                        <label className="label">Password</label>
+                        <label className="metro-label">Password</label>
                         <Form.Control type="password" name="password" required className="metro-input" />
                     </Form.Group>
-                    <div className="d-flex gap-2">
+                    
+                    <div className="d-flex gap-2 mt-4">
                         <button type="submit" className="btn-metro flex-grow-1" disabled={isPending}>
                             Login
                         </button>
@@ -60,5 +72,7 @@ export function LoginForm(props) {
 }
 
 export function LogoutButton(props) {
-    return <Button variant="metro-btn-outline btn-logout" onClick={props.handleLogout}>Logout</Button>;
+    return (
+        <Button className="btn-logout-nav" onClick={props.handleLogout}>Logout</Button>
+    );
 }
