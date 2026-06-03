@@ -2,17 +2,26 @@ import { Link } from "react-router";
 
 function NotFound() {
     return (
-        <div className="game-wrapper">
-            <div className="metro-card text-center">
-                <i className="bi bi-signpost-split metro-icon-xl d-block mb-3"></i>   
-                <h1 className="metro-title mb-3">404 - Off the Rails</h1>
+        <div className="page-center">
+            {/* Usiamo la nuova error-card per mantenere le proporzioni */}
+            <div className="metro-card text-center error-card">
                 
-                <p className="metro-text-muted lead mb-5">
+                {/* Icona gigante usando display-1 di Bootstrap */}
+                <i className="bi bi-exclamation-triangle text-accent display-1 d-block mb-3"></i> 
+                
+                {/* Codice di errore in stile terminale */}
+                <p className="text-accent font-mono-custom fw-bold fs-5 mb-1">
+                    ERROR 404
+                </p>
+                
+                <h1 className="text-uppercase fw-bold mb-3">Off the Rails</h1>
+                
+                <p className="text-muted-custom font-mono-custom mb-5">
                     Nothing to see here... This is not the route you are looking for!
                 </p>
                 
-                <Link to="/" className="btn metro-btn-primary px-4 py-2">
-                    <i className="bi bi-house-door me-2"></i> Back to Home
+                <Link to="/" className="btn-metro w-100">
+                    Back to Home
                 </Link>
                 
             </div>
