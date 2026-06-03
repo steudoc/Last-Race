@@ -1,0 +1,176 @@
+
+/* REUSABLE VARIABLES */
+:root {
+  --accent: #f97316;
+  --accent-hover: #ea580c;
+  --accent-bg: rgba(249, 115, 22, 0.08);
+  --accent-glow: rgba(249, 115, 22, 0.16);
+
+  /* glassmorphism specs */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 16px 40px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --glass-blur: blur(20px);
+
+  /* global colors */
+  --text-main: #0f172a;       /* Slate 900 (Deep elegant dark gray) */
+  --text-muted: #64748b;      /* Slate 500 */
+  --input-bg: rgba(255, 255, 255, 0.5);
+  --border-input: rgba(15, 23, 42, 0.08);
+
+  /* utils UI layout */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* BACKGROUND */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #fef3c7 50%, #fecdd3 100%);
+  background-attachment: fixed;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* REUSABLE COMPONENTS */
+
+/* main container */
+.metro-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* global typography helpers */
+.text-accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.text-muted-custom {
+  color: var(--text-muted);
+}
+
+/* reusable nput */
+.metro-input {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--border-input) !important;
+  color: var(--text-main) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.8rem 1.2rem !important;
+  font-size: 0.95rem !important;
+  backdrop-filter: blur(5px);
+  transition: all var(--transition) !important;
+}
+
+.metro-input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px var(--accent-glow) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  outline: none;
+}
+
+/* BUTTONS */
+.btn-metro {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+.btn-metro:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+}
+
+.btn-metro:active {
+  transform: scale(0.97);
+}
+
+.btn-metro-outline {
+  background: transparent;
+  border: 1px solid var(--text-muted);
+  color: var(--text-main);
+  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-metro-outline:hover {
+  border-color: var(--accent);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--accent);
+}
+
+.btn-metro-outline:active {
+  transform: scale(0.97);
+}
+
+/* layout wrappers */
+.page-center {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.page-enter {
+  animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* metro line chips */
+.line-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.line-purple { background-color: #7c3aed; }
+.line-blue   { background-color: #2563eb; }
+.line-green  { background-color: #16a34a; }
+.line-yellow { background-color: #eab308; color: #0f172a; } /* Dark text for yellow readability */
+.line-orange { background-color: #ea580c; }
+.line-red    { background-color: #dc2626; }
