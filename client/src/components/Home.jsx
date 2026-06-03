@@ -11,8 +11,12 @@ function Home(props) {
                         <p className="text-muted-custom mb-4">
                             Plan your route. Beat the clock. Collect your coins.
                         </p>
-                        {props.loggedIn ? 
-                            <Link to="/play" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Play</Link> :
+                        {props.loggedIn ?
+                            <>
+                                <Link to="/play" className="btn-metro me-2"><i className="bi bi-play-fill me-2"></i>Play</Link>
+                                <Link to="/map" className="btn-metro-outline me-2"><i className="bi bi-map me-2"></i>Map</Link>
+                                <Link to="/ranking" className="btn-metro-outline"><i class="bi bi-trophy me-2"></i>Ranking</Link>
+                            </> :
                             <Link to="/login" className="btn-metro">Login to Start</Link>
                         }
                     </div>
@@ -28,7 +32,7 @@ function Home(props) {
                     </div>
                 </div>
 
-                {/* HOW TO PLAY */}
+                {/* instructions */}
                 <div className="mb-5">
                     <p className="text-accent text-uppercase fw-bold small mb-1">How to play</p>
                     <h2 className="mb-4">Four Gameplay Phases</h2>
@@ -38,7 +42,7 @@ function Home(props) {
                                 <div className="phase-number">01</div>
                                 <div className="phase-icon"><i className="bi bi-map" /></div>
                                 <h3 className="phase-title">Setup</h3>
-                                <p className="phase-desc">Study the full metro network map: lines, stations and active connections.</p>
+                                <p className="phase-desc">Study the full metro network map: lines, stations and connections.</p>
                             </div>
                         </div>
                         <div className="col-12 col-sm-6 col-md-3">
@@ -54,7 +58,7 @@ function Home(props) {
                                 <div className="phase-number">03</div>
                                 <div className="phase-icon"><i className="bi bi-lightning" /></div>
                                 <h3 className="phase-title">Execution</h3>
-                                <p className="phase-desc">Random unpredictable events hit each leg of your journey. Gain or lose currency.</p>
+                                <p className="phase-desc">Random unpredictable events hit each leg of your journey. Gain or lose coins.</p>
                             </div>
                         </div>
                         <div className="col-12 col-sm-6 col-md-3">
@@ -62,16 +66,16 @@ function Home(props) {
                                 <div className="phase-number">04</div>
                                 <div className="phase-icon"><i className="bi bi-trophy" /></div>
                                 <h3 className="phase-title">Result</h3>
-                                <p className="phase-desc">Your final coin balance becomes your score. Climb the global leaderboards.</p>
+                                <p className="phase-desc">Your final coin balance becomes your score. Climb the global ranking.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* NETWORK */}
+                {/* network */}
                 <div className="mb-5">
                     <p className="text-accent text-uppercase fw-bold small mb-1">The Infrastructure</p>
-                    <h2 className="mb-4">6 Active Lines, 26 Stations, 7 Interchanges</h2>
+                    <h2 className="mb-4">6 Lines, 26 Stations, 7 Interchanges</h2>
                     <div className="d-flex flex-wrap gap-2">
                         <div className="line-chip line-purple">Purple Line</div>
                         <div className="line-chip line-blue">Blue Line</div>
@@ -81,8 +85,6 @@ function Home(props) {
                         <div className="line-chip line-red">Red Line</div>
                     </div>
                 </div>
-
-                {/* CALL TO ACTION */}
                 <div className="pt-2 border-top border-light-subtle text-center text-sm-start">
                     {props.loggedIn ? 
                         <Link to="/play" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Start Journey</Link> :

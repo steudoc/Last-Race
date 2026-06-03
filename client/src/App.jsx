@@ -1,12 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useEffect, useState } from 'react'
-import './App.css'
 import NavHeader from './components/NavHeader.jsx'; 
 import { Navigate, Route, Routes } from 'react-router';
 import API from './API/API.js';
 import DefaultLayout from './components/DefaultLayout.jsx';
 import { LoginForm } from './components/AuthComponents.jsx';
+import NotFound from './components/NotFound.jsx'
+import Home from './components/Home.jsx';
+import Ranking from './components/Ranking.jsx';
+import Map from './components/Map.jsx';
+
+import './App.css';
+import './styles/NavHeader.css';
+import './styles/Home.css';
+import './styles/AuthComponents.css';
+import './styles/Ranking.css';
+import "./styles/Map.css";
+import "./styles/SVG.css";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -48,8 +59,11 @@ function App() {
     <>
       <Routes>
         <Route element={ <DefaultLayout loggedIn={loggedIn} handleLogout={handleLogout} message={message} setMessage={setMessage} /> }>
-          <Route path='/' />
+          <Route path='/' element={ <Home loggedIn={loggedIn} /> } />
           <Route path='/login' element={!loggedIn ? <LoginForm handleLogin={handleLogin} /> : <Navigate to='/' />} />
+          <Route path='/map' element={loggedIn ? <Map /> : <Navigate to='/' />} />
+          <Route path='/ranking' element={loggedIn ? <Ranking /> : <Navigate to="/" />} />
+          <Route path='*' element={ <NotFound />} />
         </Route>
       </Routes>
     </>
@@ -61,5 +75,5 @@ export default App;
 /*
 <Route path='/map' element={loggedIn ? <MapSetup /> : <Navigate to="/" />} />
 <Route path='/game' element={loggedIn ? <GamePage user={user} /> : <Navigate to="/" />} />
-<Route path='/ranking' element={loggedIn ? <Ranking /> : <Navigate to="/" />} />
+
 */
