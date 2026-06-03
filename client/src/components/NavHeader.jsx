@@ -16,21 +16,23 @@ function NavHeader(props) {
     }, [darkMode]);
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar className="app-navbar">
             <Container>
-                <Navbar.Brand as={Link} to="/">Last Race</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">
+                    Last <span>Race</span>
+                </Navbar.Brand>
                 <Nav className="me-auto">
-                    { props.loggedIn && <>
-                        <Nav.Link as={Link} to="/map">Map</Nav.Link>
-                        <Nav.Link as={Link} to="/game">Play</Nav.Link>
-                        <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
+                    {props.loggedIn && <>
+                        <Nav.Link as={Link} to="/map" className={location.pathname === '/map' ? 'active' : ''}>Map</Nav.Link>
+                        <Nav.Link as={Link} to="/game" className={location.pathname === '/game' ? 'active' : ''}>Play</Nav.Link>
+                        <Nav.Link as={Link} to="/ranking" className={location.pathname === '/ranking' ? 'active' : ''}>Ranking</Nav.Link>
                     </>}
                 </Nav>
-                <Button onClick={() => setDarkMode(oldMode => !oldMode)}>
-                    { darkMode ? <i className="bi bi-sun-fill" /> : <i className="bi bi-moon-fill" />}
-                </Button>
-                <Nav>
-                    { props.loggedIn ? 
+                <Nav className="align-items-center gap-2">
+                    <button className="theme-toggle-btn" onClick={() => setDarkMode(d => !d)} aria-label="Toggle theme">
+                        <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-fill'}`} />
+                    </button>
+                    {props.loggedIn ?
                         <LogoutButton handleLogout={props.handleLogout} /> :
                         <Nav.Link as={Link} to="/login">Login</Nav.Link>
                     }
