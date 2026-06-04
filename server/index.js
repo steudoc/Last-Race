@@ -20,6 +20,14 @@ const port = 3001;
 app.use(express.json());
 app.use(morgan("dev"));
 
+const corsOption = {
+  origin: "http://localhost:5173",
+  optionsSuccessState: 200,
+  exposedHeaders: ["WWW-Authenticate"],
+  credentials: true
+};
+app.use(cors(corsOption));
+
 passport.use(new LocalStrategy(async function verify(username, password, cb) {
   const user = await getUser(username, password);
   if(!user) 
@@ -54,15 +62,6 @@ app.use(session({
   saveUninitialized: false,
 }));
 app.use(passport.authenticate("session"));
-
-const corsOption = {
-  origin: "http://localhost:5173",
-  optionsSuccessState: 200,
-  exposedHeaders: ["WWW-Authenticate"],
-  credentials: true
-};
-
-app.use(cors(corsOption));
 
 // ROUTES
 
@@ -133,7 +132,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
   const startTime = dayjs(activeGame.startTime);
   const elapsedTime = now.diff(startTime, 'seconds');
 
-  const MAX_ALLOWED_TIME = 91; // 1 s margin for request/response delays
+  const MAX_ALLOWED_TIME = 94; // 4 s margin for request/response delays
   if(elapsedTime > MAX_ALLOWED_TIME) {
     req.session.activeGame = null;
     return res.json({ valid: false, finalScore: 0 });
