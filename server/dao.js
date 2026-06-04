@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { Line, Station, Event } from './models.js'
 import { bfs } from "./utils.js";
 
-const db = new sqlite.Database("database.db", (err) => {
+const db = new sqlite.Database("database.sqlite", (err) => {
     if (err) throw err;
 });
 
