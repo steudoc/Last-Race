@@ -80,11 +80,7 @@ function Ranking() {
                             </thead>
                             <tbody>
                                 {rankingList.map((player, index) => (
-                                    <tr key={player.id || index}>
-                                        <td className="text-center rank-cell">{getMedal(index)}</td>
-                                        <td className="fw-bold fs-5">{player.username}</td>
-                                        <td className="text-end score-cell">{player.best_score}</td>
-                                    </tr>
+                                    <RankEntry key={player.id} getMedal={getMedal} index={index} player={player} />
                                 ))}
                             </tbody>
                         </Table>
@@ -99,6 +95,16 @@ function Ranking() {
                 
             </div>
         </div>
+    );
+}
+
+function RankEntry(props) {
+    return(
+        <tr>
+            <td className="text-center rank-cell">{props.getMedal(props.index)}</td>
+            <td className="fw-bold fs-5">{props.player.username}</td>
+            <td className="text-end score-cell">{props.player.best_score}</td>
+        </tr>
     );
 }
 
