@@ -93,7 +93,7 @@ function Map() {
                             <p className="text-muted-custom small mb-4">
                                 Review the map topology before initializing your game session.
                             </p>
-                            <Link to="/game" className="btn-metro w-100">Play</Link>
+                            <Link to="/game/setup" className="btn-metro w-100">Play</Link>
                         </div>
 
                         {/* legend */}

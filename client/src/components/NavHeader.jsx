@@ -8,7 +8,7 @@ function NavHeader(props) {
     return (
         <Navbar className="app-navbar" expand="sm">
             <Container>
-                {/* Logo e Titolo */}
+                {/* title */}
                 <Navbar.Brand as={Link} to="/">
                     <i className="bi bi-train-front text-accent me-2"></i>
                     Last Race
@@ -17,18 +17,18 @@ function NavHeader(props) {
                 <Navbar.Toggle aria-controls="main-navbar-nav" className="border-0" />
                 <Navbar.Collapse id="main-navbar-nav">
                     
-                    {/* Link centrali/sinistra visibili solo se loggato */}
+                    {/* links */}
                     <Nav className="me-auto mt-2 mt-sm-0">
                         {props.loggedIn && (
                             <>
                                 <Nav.Link as={Link} to="/map">Map</Nav.Link>
-                                <Nav.Link as={Link} to="/game">Play</Nav.Link>
+                                <Nav.Link as={Link} to="/game/setup">Play</Nav.Link>
                                 <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
                             </>
                         )}
                     </Nav>
                     
-                    {/* Sezione destra: Login o pulsante Logout */}
+                    {/* login/logout */}
                     <Nav className="align-items-center gap-2 mt-3 mt-sm-0">
                         {props.loggedIn ? (
                             <LogoutButton handleLogout={props.handleLogout} />
