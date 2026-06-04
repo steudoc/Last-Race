@@ -5,6 +5,7 @@ import { getConnections, getEvents, getLines, getRandomGameStations, getRanking,
 import { validateRoute } from "./utils.js";
 import { check, validationResult } from "express-validator";
 import session from 'express-session';
+import dayjs from "dayjs";
 
 import passport from "passport";
 import LocalStrategy from 'passport-local';
@@ -99,6 +100,13 @@ app.get("/api/connections", isLoggedIn, async (req, res) => {
 app.get("/api/game/start", isLoggedIn, async (req, res) => {
   try {
     const { startStation, endStation } = await getRandomGameStations();
+
+    req.session.activeGame = {
+      startId: startStation.id,
+      endId: endStation.id,
+      startTime: dayjs().toISOString()
+    }
+
     res.json({ startStation, endStation });
   } catch(err) {
     res.status(500).json({ error: err.message });
@@ -108,11 +116,28 @@ app.get("/api/game/start", isLoggedIn, async (req, res) => {
 // POST /api/game/execute
 app.post("/api/game/execute", isLoggedIn, async (req, res) => {
   const { connections, startId, endId } = req.body;
+  const activeGame = req.session.activeGame;
 
-  // data validation
+  // DATA VALIDATION
+  if (!activeGame) {
+    return res.status(403).json({ error: "Game not found" });
+  }
+  if (activeGame.startId !== startId || activeGame.endId !== endId) {
+    return res.status(422).json({ error: "Start and End stations illegally modified" });
+  }
   if (!connections || !Array.isArray(connections) || connections.length === 0 || !startId || !endId) {
-    return res.status(422).json({ error: "Invalid request body" });
+    return res.json({ valid: false, finalScore: 0 });
   } 
+
+  const now = dayjs();
+  const startTime = dayjs(activeGame.startTime);
+  const elapsedTime = now.diff(startTime, 'seconds');
+
+  const MAX_ALLOWED_TIME = 91; // 1 s margin for request/response delays
+  if(elapsedTime > MAX_ALLOWED_TIME) {
+    req.session.activeGame = null;
+    return res.json({ valid: false, finalScore: 0 });
+  }
 
   try {
     const events = await getEvents();

@@ -10,6 +10,7 @@ import NotFound from './components/NotFound.jsx'
 import Home from './components/Home.jsx';
 import Ranking from './components/Ranking.jsx';
 import Map from './components/Map.jsx';
+import GamePage from './components/GamePage.jsx';
 
 import './App.css';
 import './styles/NavHeader.css';
@@ -18,6 +19,7 @@ import './styles/AuthComponents.css';
 import './styles/Ranking.css';
 import "./styles/Map.css";
 import "./styles/SVG.css";
+import "./styles/GamePage.css";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -62,6 +64,7 @@ function App() {
           <Route path='/' element={ <Home loggedIn={loggedIn} /> } />
           <Route path='/login' element={!loggedIn ? <LoginForm handleLogin={handleLogin} /> : <Navigate to='/' />} />
           <Route path='/map' element={loggedIn ? <Map /> : <Navigate to='/' />} />
+          <Route path='/game' element={loggedIn ? <GamePage /> : <Navigate to='/' />} />
           <Route path='/ranking' element={loggedIn ? <Ranking /> : <Navigate to="/" />} />
           <Route path='*' element={ <NotFound />} />
         </Route>

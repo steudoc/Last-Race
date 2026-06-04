@@ -23,22 +23,35 @@ export const bfs = (start, end, graph) => {
 // checks that the sumbmitted route is compliant with the game's rules
 export const validateRoute = (connections, startId, endId, validConnections) => {
     // check route starts and ends correctly
-    if (connections[0].fromId !== startId) return false;
-    if (connections[connections.length - 1].toId !== endId) return false;
+    if (connections[0].id1 !== startId && connections[0].id2 !== startId) return false;
+    if (connections[connections.length - 1].id1 !== endId && connections[connections.length - 1].id2 !== endId) return false;
+
+    let currentNode = startId;
 
     // check each connection exists and is contiguous
     for (let i = 0; i < connections.length; i++) {
         const conn = connections[i];
 
         const exists = validConnections.some(c => 
-            (c.id1 === conn.fromId && c.id2 === conn.toId) ||
-            (c.id1 === conn.toId && c.id2 === conn.fromId)
+            (c.id1 === conn.id1 && c.id2 === conn.id2) ||
+            (c.id1 === conn.id2 && c.id2 === conn.id1)
         );
         if (!exists) return false;
 
         // check continuity
         if (i < connections.length - 1) {
-            if (conn.toId !== connections[i + 1].fromId) return false;
+            if (conn.id1 !== connections[i + 1].id1 
+                && conn.id1 !== connections[i + 1].id2
+                && conn.id2 !== connections[i + 1].id1
+                && conn.id2 !== connections[i + 1].id2) return false;
+        }
+
+        if (conn.id1 === currentNode) {
+            currentNode = conn.id2;
+        } else if (conn.id2 === currentNode) {
+            currentNode = conn.id1;
+        } else {
+            return false;
         }
 
         /* Note: line changes are implicitly validated. 

@@ -123,16 +123,19 @@ POST `/api/game/execute`
     ```
     {
       connections: [
-        { fromId: 3, toId: 4 },
-        { fromId: 4, toId: 5 },
+        { fromId: 1, toId: 2 },
+        { fromId: 2, toId: 3 },
         ...
-      ]
+      ],
+      startId: 1,
+      endId: 4,
     }
     ```
   - response body: validation result and, if valid, list of connections with their random events and running coin total; if invalid, score is 0
   - response status: 
     - 200 OK
     - 401 Unauthorized
+    - 403 Forbidden
     - 422 Unprocessable Content
     - 500 Internal Server Error
   - response body example (in case of success, valid route): 
@@ -141,8 +144,13 @@ POST `/api/game/execute`
       valid: true,
       finalScore: 17,
       connections: [
-        { fromName: 'Cavallermaggiore', toName: 'Savigliano', event: 'Viaggio tranquillo', effect: 0, coinsAfter: 20 },
-        { fromName: 'Savigliano', toName: 'Fossano', event: 'Binario sbagliato', effect: -2, coinsAfter: 18 },
+        { 
+          fromName: 'Cavallermaggiore', 
+          toName: 'Savigliano', 
+          event: 'Smooth ride', 
+          effect: 0, 
+          coinsAfter: 20 
+        },
         ...
       ]
     }
