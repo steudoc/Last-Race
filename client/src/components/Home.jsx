@@ -13,9 +13,9 @@ function Home(props) {
                         </p>
                         {props.loggedIn ?
                             <>
-                                <Link to="/play" className="btn-metro me-2"><i className="bi bi-play-fill me-2"></i>Play</Link>
+                                <Link to="/game" className="btn-metro me-2"><i className="bi bi-play-fill me-2"></i>Play</Link>
                                 <Link to="/map" className="btn-metro-outline me-2"><i className="bi bi-map me-2"></i>Map</Link>
-                                <Link to="/ranking" className="btn-metro-outline"><i class="bi bi-trophy me-2"></i>Ranking</Link>
+                                <Link to="/ranking" className="btn-metro-outline"><i className="bi bi-trophy me-2"></i>Ranking</Link>
                             </> :
                             <Link to="/login" className="btn-metro">Login to Start</Link>
                         }
@@ -87,7 +87,7 @@ function Home(props) {
                 </div>
                 <div className="pt-2 border-top border-light-subtle text-center text-sm-start">
                     {props.loggedIn ? 
-                        <Link to="/play" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Start Journey</Link> :
+                        <Link to="/game" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Start Game</Link> :
                         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
                             <p className="text-muted-custom small m-0">
                                 Authentication required. Access the system to unlock the transit network map.

@@ -44,7 +44,7 @@ const startGame = async () => {
         throw await response.json();
 };
 
-const executeGame = async () => {
+const executeGame = async (connections, startId, endId) => {
     const response = await fetch(SERVER_URL + "/api/game/execute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

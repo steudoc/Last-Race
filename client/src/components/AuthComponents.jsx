@@ -60,9 +60,9 @@ export function LoginForm(props) {
                     </Form.Group>
                     
                     <div className="d-flex gap-2 mt-4">
-                        <button type="submit" className="btn-metro flex-grow-1" disabled={isPending}>
+                        <Button type="submit" className="btn-metro flex-grow-1" disabled={isPending}>
                             Login
-                        </button>
+                        </Button>
                         <Link className="btn-metro-outline" to="/">Cancel</Link>
                     </div>
                 </Form>
