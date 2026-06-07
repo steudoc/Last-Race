@@ -1,5 +1,6 @@
 
-// bfs to find distance between two stations (ricerca in ampiezza)
+// bfs to find distance between two stations (Breadth-First Search, ricerca in ampiezza)
+// returns infinite if the two stations are not reachable
 export const bfs = (start, end, graph) => {
     const visited = new Set();
     const queue = [[start, 0]];
