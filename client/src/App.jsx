@@ -10,7 +10,8 @@ import NotFound from './components/NotFound.jsx'
 import Home from './components/Home.jsx';
 import Ranking from './components/Ranking.jsx';
 import Map from './components/Map.jsx';
-import { GamePage, GameSetup } from './components/GamePage.jsx';
+import { GamePlan, GameSetup } from './components/GameSetup&Plan.jsx';
+import { GameExecute, GameResult } from './components/GameExecute&Result.jsx';
 
 import './App.css';
 import './styles/NavHeader.css';
@@ -25,6 +26,7 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [loggedIn, setLoggedIn] = useState(false);
   const [message, setMessage] = useState("");
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -34,6 +36,8 @@ function App() {
         setUser(user);
       } catch(err) {
         console.warn(err);
+      } finally {
+        setAuthLoading(false);
       }
     };
     checkAuth();
@@ -55,7 +59,9 @@ function App() {
     setLoggedIn(false);
     setMessage("");
     setUser(undefined);
-  };
+  };  
+
+  const [gameResult, setGameResult] = useState(null);
 
   return (
     <>
@@ -64,10 +70,12 @@ function App() {
           <Route path='/' element={ <Home loggedIn={loggedIn} /> } />
           <Route path='/login' element={!loggedIn ? <LoginForm handleLogin={handleLogin} /> : <Navigate to='/' />} />
           <Route path='/map' element={loggedIn ? <Map /> : <Navigate to='/' />} />
-          <Route path='/game/setup' element={loggedIn ? <GameSetup /> : <Navigate to='/' />} />
-          <Route path='/game/plan' element={loggedIn ? <GamePage /> : <Navigate to='/' />} />
-          {/*<Route path='/game/result' element={loggedIn ? <NotFound /> : <Navigate to='/' />} />*/}
-          <Route path='/ranking' element={loggedIn ? <Ranking /> : <Navigate to="/" />} />
+          <Route path='/game/setup' element={loggedIn ? <GameSetup /> : <Navigate replace to='/' />} />
+          <Route path='/game/plan' element={loggedIn ? <GamePlan setGameResult={setGameResult} gameResult={gameResult} /> : <Navigate replace to='/' />} />
+          <Route path='/game/execute' element={loggedIn && gameResult?.valid ? <GameExecute gameResult={gameResult} /> : <Navigate replace to='/' />} />
+          <Route path='/game/result' element={
+            authLoading ? null : (loggedIn && gameResult ? <GameResult gameResult={gameResult} /> : <Navigate replace to='/' />)} />
+          <Route path='/ranking' element={loggedIn ? <Ranking /> : <Navigate replace to="/" />} />
           <Route path='*' element={ <NotFound />} />
         </Route>
       </Routes>

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { Alert, Spinner, Button } from "react-bootstrap";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import API from "../API/API";
 
 dayjs.extend(duration);
 
-export function GamePage(props) {
+export function GamePlan(props) {
     // GAME STATES 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -21,6 +21,8 @@ export function GamePage(props) {
     const [selectedSegments, setSelectedSegments] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [gameResult, setGameResult] = useState(null);
+
+    const navigate = useNavigate();
 
     // retrieve data
     useEffect(() =>{
@@ -52,7 +54,7 @@ export function GamePage(props) {
         setLoading(true);
         try {
             const result = await API.executeGame(selectedSegments, startStation.id, endStation.id);
-            setGameResult(result);
+            props.setGameResult(result);
         } catch(err) {
             console.warn(err);
         }
@@ -81,8 +83,11 @@ export function GamePage(props) {
 
     // add segment
     const handleAddSegment = (segment) => {
-        if (!selectedSegments.includes(segment)) {
-            setSelectedSegments([...selectedSegments, segment]);
+        const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
+        if (isSelected) {
+            setSelectedSegments(prev => prev.filter(s => !(s.id1 === segment.id1 && s.id2 === segment.id2)));
+        } else {
+            setSelectedSegments(prev => [...prev, segment]);
         }
     };
 
@@ -104,7 +109,7 @@ export function GamePage(props) {
                 <Alert className="metro-alert metro-alert-danger text-center py-5" style={{width: '100%', maxWidth: '600px'}}>
                     {error}
                     <div className="mt-4">
-                        <Link to="/" className="btn-metro-outline">ABORT MISSION</Link>
+                        <Link to="/" className="btn-metro-outline">ERROR</Link>
                     </div>
                 </Alert>
             </div>
@@ -146,22 +151,8 @@ export function GamePage(props) {
                     </div>
 
                     {/* ROUTE BUILD & RESULT */}
-                    {gameResult ? (
-                        // REPORT
-                        <div className="segments-panel justify-content-center text-center">
-                            <h3 className="font-mono-custom text-uppercase text-accent mb-2">RESULT</h3>
-                            <p className="text-muted-custom font-mono-custom mb-5">Data validated by server.</p>
-                            
-                            <div className="mb-5">
-                                <p className="font-mono-custom text-uppercase small text-muted-custom mb-1">COINS COLLECTED</p>
-                                <div className="display-3 font-mono-custom fw-bold" style={{ color: '#eab308' }}>
-                                    {gameResult.finalScore} ¢
-                                </div>
-                            </div>
-                            
-                            <Link to="/ranking" className="btn-metro w-100 mb-3">VIEW STANDINGS</Link>
-                            <Link to="/" className="btn-metro-outline w-100">RETURN TO HOME</Link>
-                        </div>
+                    {props.gameResult ? (
+                        props.gameResult.valid ? navigate('/game/execute') : navigate('/game/result')
                     ) : (
                         // GAME BOARD
                         <div className="segments-panel d-flex">
@@ -169,13 +160,16 @@ export function GamePage(props) {
                                 <p className="font-mono-custom small text-accent mb-2">SELECTED ROUTE</p>
                                 <div className="current-route-box">
                                     {selectedSegments.length === 0 ? (
-                                        <span className="text-muted-custom font-mono-custom small">AWAITING INPUT...</span>
+                                        <span className="text-muted-custom font-mono-custom small">AWAITING STATIONS...</span>
                                     ) : (
                                         selectedSegments.map(segment => {
                                             const segmentId = `${segment.id1}-${segment.id2}`; 
                                             return (
                                                 <div key={segmentId} className="route-chip">
                                                     <span>{segment.name1} - {segment.name2}</span>
+                                                    <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
+                                                        <i className="bi bi-x" />
+                                                    </button>
                                                 </div>
                                             );
                                         })
@@ -191,7 +185,7 @@ export function GamePage(props) {
                                 <div className="segment-list">
                                     {connections.map(segment => {
                                         const segmentId = `${segment.id1}-${segment.id2}`;
-                                        const isSelected = selectedSegments.includes(segment);
+                                        const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
 
                                         return(<Segment key={segmentId} segmentId={segmentId} isSelected={isSelected} isSubmitted={isSubmitted} segment={segment} handleAddSegment={handleAddSegment}/>);
                                     })}

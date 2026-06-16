@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function NavHeader(props) {
     const location = useLocation();
-    const isPlaying = location.pathname === '/game/plan';
+    const isPlaying = location.pathname === '/game/plan' || location.pathname === '/game/execute';
 
     return (
         <Navbar className="app-navbar" expand="sm">

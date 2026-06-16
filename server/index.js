@@ -13,20 +13,12 @@ import LocalStrategy from 'passport-local';
 import cors from "cors";
 
 // init express
-const app = new express();
+const app = express();
 const port = 3001;
 
 // middlewares
 app.use(express.json());
 app.use(morgan("dev"));
-
-const corsOption = {
-  origin: "http://localhost:5173",
-  optionsSuccessState: 200,
-  exposedHeaders: ["WWW-Authenticate"],
-  credentials: true
-};
-app.use(cors(corsOption));
 
 passport.use(new LocalStrategy(async function verify(username, password, cb) {
   const user = await getUser(username, password);
@@ -62,6 +54,14 @@ app.use(session({
   saveUninitialized: false,
 }));
 app.use(passport.authenticate("session"));
+
+const corsOption = {
+  origin: "http://localhost:5173",
+  optionsSuccessState: 200,
+  exposedHeaders: ["WWW-Authenticate"],
+  credentials: true
+};
+app.use(cors(corsOption));
 
 // ROUTES
 
@@ -117,7 +117,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
   const { connections, startId, endId } = req.body;
   const activeGame = req.session.activeGame;
 
-  // DATA VALIDATION
+  // data validation
   if (!activeGame) {
     return res.status(403).json({ error: "Game not found" });
   }
