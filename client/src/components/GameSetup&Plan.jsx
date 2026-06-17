@@ -7,7 +7,7 @@ import API from "../API/API";
 
 dayjs.extend(duration);
 
-export function GamePlan(props) {
+export function GamePlan() {
     // GAME STATES 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -20,7 +20,6 @@ export function GamePlan(props) {
     const [timeLeft, setTimeLeft] = useState(90);
     const [selectedSegments, setSelectedSegments] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [gameResult, setGameResult] = useState(null);
 
     const navigate = useNavigate();
 
@@ -53,8 +52,8 @@ export function GamePlan(props) {
         setIsSubmitted(true);
         setLoading(true);
         try {
-            const result = await API.executeGame(selectedSegments, startStation.id, endStation.id);
-            props.setGameResult(result);
+            const gameResult = await API.executeGame(selectedSegments, startStation.id, endStation.id);
+            navigate('/game/execute', { state: { gameResult } });
         } catch(err) {
             console.warn(err);
         }
@@ -91,7 +90,7 @@ export function GamePlan(props) {
         }
     };
 
-    // STATE RENDERING ===
+    // loading rendering 
     if (loading) {
         return (
             <div className="page-center page-enter">
@@ -103,6 +102,7 @@ export function GamePlan(props) {
         );
     }
 
+    // error rendering
     if (error) {
         return (
             <div className="page-center page-enter">
@@ -117,7 +117,7 @@ export function GamePlan(props) {
     }
 
 
-    // GAME RENDERING
+    // game 
     return (
         <div className="page-center page-enter">
             <div className="container-fluid">
@@ -142,59 +142,53 @@ export function GamePlan(props) {
                 </div>
 
                 <div className="game-dashboard">
-                    
-                    {/* MAP */}
+                    {/* map */}
                     <div className="blind-map-container flex-column text-center">
                         <i className="bi bi-motherboard display-1 text-secondary opacity-50 mb-4 d-block"></i>
                         <p className="text-accent font-mono-custom fw-bold fs-5 mb-1">&gt; MAP_MODULE_OFFLINE</p>
                         <p className="text-muted-custom font-mono-custom small">Awaiting structural topology data...</p>
                     </div>
 
-                    {/* ROUTE BUILD & RESULT */}
-                    {props.gameResult ? (
-                        props.gameResult.valid ? navigate('/game/execute') : navigate('/game/result')
-                    ) : (
-                        // GAME BOARD
-                        <div className="segments-panel d-flex">
-                            <div className="col-5">
-                                <p className="font-mono-custom small text-accent mb-2">SELECTED ROUTE</p>
-                                <div className="current-route-box">
-                                    {selectedSegments.length === 0 ? (
-                                        <span className="text-muted-custom font-mono-custom small">AWAITING STATIONS...</span>
-                                    ) : (
-                                        selectedSegments.map(segment => {
-                                            const segmentId = `${segment.id1}-${segment.id2}`; 
-                                            return (
-                                                <div key={segmentId} className="route-chip">
-                                                    <span>{segment.name1} - {segment.name2}</span>
-                                                    <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
-                                                        <i className="bi bi-x" />
-                                                    </button>
-                                                </div>
-                                            );
-                                        })
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="d-flex flex-column h-100 overflow-hidden col-6">
-                                <p className="font-mono-custom small text-accent border-bottom border-urban pb-2 mb-3">
-                                    AVAILABLE SEGMENTS ({connections.length})
-                                </p>
-                                
-                                <div className="segment-list">
-                                    {connections.map(segment => {
-                                        const segmentId = `${segment.id1}-${segment.id2}`;
-                                        const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
-
-                                        return(<Segment key={segmentId} segmentId={segmentId} isSelected={isSelected} isSubmitted={isSubmitted} segment={segment} handleAddSegment={handleAddSegment}/>);
-                                    })}
-                                </div>
-
-                                <SubmitButton isSubmitted={isSubmitted} handleSubmitRoute={handleSubmitRoute} />
+                    {/* game board */}
+                    <div className="segments-panel d-flex">
+                        <div className="col-5">
+                            <p className="font-mono-custom small text-accent mb-2">SELECTED ROUTE</p>
+                            <div className="current-route-box">
+                                {selectedSegments.length === 0 ? (
+                                    <span className="text-muted-custom font-mono-custom small">AWAITING STATIONS...</span>
+                                ) : (
+                                    selectedSegments.map(segment => {
+                                        const segmentId = `${segment.id1}-${segment.id2}`; 
+                                        return (
+                                            <div key={segmentId} className="route-chip">
+                                                <span>{segment.name1} - {segment.name2}</span>
+                                                <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
+                                                    <i className="bi bi-x" />
+                                                </button>
+                                            </div>
+                                        );
+                                    })
+                                )}
                             </div>
                         </div>
-                    )}
+
+                        <div className="d-flex flex-column h-100 overflow-hidden col-6">
+                            <p className="font-mono-custom small text-accent border-bottom border-urban pb-2 mb-3">
+                                AVAILABLE SEGMENTS ({connections.length})
+                            </p>
+                            
+                            <div className="segment-list">
+                                {connections.map(segment => {
+                                    const segmentId = `${segment.id1}-${segment.id2}`;
+                                    const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
+
+                                    return(<Segment key={segmentId} segmentId={segmentId} isSelected={isSelected} isSubmitted={isSubmitted} segment={segment} handleAddSegment={handleAddSegment}/>);
+                                })}
+                            </div>
+
+                            <SubmitButton isSubmitted={isSubmitted} handleSubmitRoute={handleSubmitRoute} />
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -227,11 +221,9 @@ export function GameSetup() {
     return(
         <div className="page-center page-enter">
             <div className="metro-card home-container text-center p-4 p-md-5 w-50" > 
-                {/* title */}
                 <i className="bi bi-train-front display-1 text-accent mb-3 d-block opacity-75"></i>
                 <h2 className="font-mono-custom text-uppercase mb-3">READY?</h2>
                 
-                {/* description */}
                 <div className="text-muted-custom mb-4 text-start">
                     <p>Upon activation, you will have exactly <strong className="text-accent">90 seconds</strong> to find the correct route.</p>
                     <p>Are you ready to play, or do you need to review the <strong className="text-accent">network map</strong> first?</p>
@@ -239,7 +231,6 @@ export function GameSetup() {
 
                 <div className="border-bottom border-urban mb-4"></div>
 
-                {/* call to action */}
                 <div className="d-flex flex-column gap-3">
                     <Link to="/game/plan" className="btn-metro w-100 py-3 fw-bold">
                         <i className="bi bi-play-fill me-2"></i> START NEW GAME
