@@ -5,7 +5,7 @@ import { ProgressBar } from "react-bootstrap";
 export function GameExecute() {
     const { state } = useLocation();
 
-    if (!state?.gameResult) return <Navigate to='/' />
+    if (!state?.gameResult) return <Navigate to='/notFound' />
     const { gameResult } = state;
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -94,7 +94,7 @@ export function GameExecute() {
 export function GameResult() {
     const { state } = useLocation();
 
-    if (!state?.gameResult) return <Navigate to='/' />
+    if (!state?.gameResult) return <Navigate to='/notFound' />
     const { gameResult } = state;
 
     return(
