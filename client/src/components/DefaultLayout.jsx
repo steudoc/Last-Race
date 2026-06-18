@@ -15,7 +15,7 @@ function DefaultLayout(props) {
                         </Alert>
                     </Col>   
                 </Row>}
-                <Row className="d-flex justify-content-center mt-3">
+                <Row className="d-flex justify-content-center">
                     <Outlet />
                 </Row>
             </Container>
