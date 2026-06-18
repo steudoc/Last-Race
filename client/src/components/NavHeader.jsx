@@ -8,7 +8,7 @@ function NavHeader(props) {
     const isPlaying = location.pathname === '/game/plan' || location.pathname === '/game/execute';
 
     return (
-        <Navbar className="app-navbar" expand="sm">
+        <Navbar className="app-navbar" expand="sm" sticky="top">
             <Container>
                 <Navbar.Brand as={Link} to={isPlaying ? "#" : "/"}>
                     <i className="bi bi-train-front text-accent me-2"></i>

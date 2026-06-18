@@ -1,5 +1,5 @@
 import { useActionState } from "react";
-import { Form, Alert, Button, Container } from "react-bootstrap";
+import { Form, Alert, Button } from "react-bootstrap";
 import { Link } from "react-router";
 
 export function LoginForm(props) {
@@ -20,10 +20,10 @@ export function LoginForm(props) {
     }
 
     return (
-        <div className="page-center">
-            <div className="metro-card login-page-card">
+        <div className="page-center d-flex">
+            <div className="metro-card m-1 col-4">
                 {/* decorative lines*/}
-                <div className="lines-row">
+                <div className="lines-row d-flex mb-4">
                     <div className="line-chip line-blue"></div>
                     <div className="line-chip line-red"></div>
                     <div className="line-chip line-yellow"></div>
@@ -36,7 +36,7 @@ export function LoginForm(props) {
                     ALL ABOARD
                 </p>
                 <h2 className="login-title">Login</h2>
-                <p className="login-subtitle">Enter your credentials</p>
+                <p className="login-subtitle mb-4">Enter your credentials</p>
 
                 {isPending && (
                     <Alert className="metro-alert metro-alert-warning py-2">
@@ -49,12 +49,12 @@ export function LoginForm(props) {
 
                 <Form action={formAction}>
                     <Form.Group className="mb-3">
-                        <label className="metro-label">Username</label>
+                        <label className="metro-label mb-1">Username</label>
                         <Form.Control type="text" name="username" required className="metro-input" />
                     </Form.Group>
                     
                     <Form.Group className="mb-4">
-                        <label className="metro-label">Password</label>
+                        <label className="metro-label mb-1">Password</label>
                         <Form.Control type="password" name="password" required className="metro-input" />
                     </Form.Group>
                     
