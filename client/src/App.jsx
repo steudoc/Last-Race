@@ -10,7 +10,7 @@ import NotFound from './components/NotFound.jsx'
 import Home from './components/Home.jsx';
 import Ranking from './components/Ranking.jsx';
 import Map from './components/Map.jsx';
-import { GamePlan, GameSetup } from './components/GameSetup&Plan.jsx';
+import GamePlan from './components/GamePlan.jsx';
 import { GameExecute, GameResult } from './components/GameExecute&Result.jsx';
 
 import './App.css';
@@ -20,7 +20,7 @@ import './styles/AuthComponents.css';
 import './styles/Ranking.css';
 import "./styles/Map.css";
 import "./styles/SVG.css";
-import "./styles/GameSetup&Plan.css";
+import "./styles/GamePlan.css";
 import "./styles/GameExecute&Result.css";
 
 function App() {

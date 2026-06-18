@@ -15,31 +15,26 @@ function NavHeader(props) {
                     Last Race
                 </Navbar.Brand>
                 
-                <Navbar.Toggle aria-controls="main-navbar-nav" className="border-0" />
-                <Navbar.Collapse id="main-navbar-nav">
-                    
-                    {/* links */}
-                    <Nav className="me-auto mt-2 mt-sm-0">
-                        {props.loggedIn && !isPlaying && (
-                            <>
-                                <Nav.Link as={Link} to="/game/setup">Play</Nav.Link>
-                                <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
-                            </>
-                        )}
-                    </Nav>
-                    
-                    {/* login/logout */}
-                    <Nav className="align-items-center gap-2 mt-3 mt-sm-0">
-                        {props.loggedIn ? (
-                            !isPlaying && <LogoutButton handleLogout={props.handleLogout} />
-                        ) : (
-                            <Link to="/login" className="btn-metro py-1.5 px-3 fs-6 rounded-3">
-                                Login
-                            </Link>
-                        )}
-                    </Nav>
-                    
-                </Navbar.Collapse>
+                {/* links */}
+                <Nav className="me-auto mt-2 mt-sm-0">
+                    {props.loggedIn && !isPlaying && (
+                        <>
+                            <Nav.Link as={Link} to="/game/setup">Play</Nav.Link>
+                            <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
+                        </>
+                    )}
+                </Nav>
+                
+                {/* login/logout */}
+                <Nav className="align-items-center gap-2 mt-3 mt-sm-0">
+                    {props.loggedIn ? (
+                        !isPlaying && <LogoutButton handleLogout={props.handleLogout} />
+                    ) : (
+                        <Link to="/login" className="btn-metro py-2 px-3 fs-6 rounded-3">
+                            Login
+                        </Link>
+                    )}
+                </Nav>
             </Container>
         </Navbar>
     );

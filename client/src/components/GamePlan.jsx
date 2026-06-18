@@ -7,7 +7,7 @@ import API from "../API/API";
 
 dayjs.extend(duration);
 
-export function GamePlan() {
+function GamePlan() {
     // GAME STATES 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -216,3 +216,5 @@ function SubmitButton(props) {
         </Button>
     );
 }
+
+export default GamePlan;
