@@ -22,8 +22,7 @@ export function LoginForm(props) {
     return (
         <div className="page-center">
             <div className="metro-card login-page-card">
-                
-                {/* Decorative Rail lines */}
+                {/* decorative lines*/}
                 <div className="lines-row">
                     <div className="line-chip line-blue"></div>
                     <div className="line-chip line-red"></div>
@@ -41,7 +40,7 @@ export function LoginForm(props) {
 
                 {isPending && (
                     <Alert className="metro-alert metro-alert-warning py-2">
-                        CONNECTING TO SERVER...
+                        LOADING...
                     </Alert>
                 )}
                 {state?.error && (

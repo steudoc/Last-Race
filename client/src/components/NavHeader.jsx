@@ -10,7 +10,6 @@ function NavHeader(props) {
     return (
         <Navbar className="app-navbar" expand="sm">
             <Container>
-                {/* title */}
                 <Navbar.Brand as={Link} to={isPlaying ? "#" : "/"}>
                     <i className="bi bi-train-front text-accent me-2"></i>
                     Last Race
@@ -23,7 +22,6 @@ function NavHeader(props) {
                     <Nav className="me-auto mt-2 mt-sm-0">
                         {props.loggedIn && !isPlaying && (
                             <>
-                                <Nav.Link as={Link} to="/map">Map</Nav.Link>
                                 <Nav.Link as={Link} to="/game/setup">Play</Nav.Link>
                                 <Nav.Link as={Link} to="/ranking">Ranking</Nav.Link>
                             </>
@@ -36,7 +34,7 @@ function NavHeader(props) {
                             !isPlaying && <LogoutButton handleLogout={props.handleLogout} />
                         ) : (
                             <Link to="/login" className="btn-metro py-1.5 px-3 fs-6 rounded-3">
-                                Sign In
+                                Login
                             </Link>
                         )}
                     </Nav>

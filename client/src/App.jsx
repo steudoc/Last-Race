@@ -65,8 +65,7 @@ function App() {
         <Route element={ <DefaultLayout loggedIn={loggedIn} handleLogout={handleLogout} message={message} setMessage={setMessage} /> }>
           <Route path='/' element={ <Home loggedIn={loggedIn} /> } />
           <Route path='/login' element={!loggedIn ? <LoginForm handleLogin={handleLogin} /> : <Navigate to='/' />} />
-          <Route path='/map' element={loggedIn ? <Map /> : <Navigate to='/' />} />
-          <Route path='/game/setup' element={loggedIn ? <GameSetup /> : <Navigate replace to='/' />} />
+          <Route path='/game/setup' element={loggedIn ? <Map /> : <Navigate replace to='/' />} />
           <Route path='/game/plan' element={loggedIn ? <GamePlan /> : <Navigate replace to='/' />} />
           <Route path='/game/execute' element={loggedIn ? <GameExecute /> : <Navigate replace to='/' />} />
           <Route path='/game/result' element={loggedIn ? <GameResult /> : <Navigate replace to='/' />} />

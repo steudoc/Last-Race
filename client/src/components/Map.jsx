@@ -91,9 +91,12 @@ function Map() {
                         <div>
                             <h3 className="sidebar-section-title">Setup</h3>
                             <p className="text-muted-custom small mb-4">
-                                Review the map topology before initializing your game session.
+                                Review the metro map before initializing your game session.<br />
+                                Upon activation, you will have exactly <strong className="text-accent">90 seconds</strong> to find the correct route. 
+                                You will start the game with 20 coins. <br />
+                                <strong className="text-accent"> Are you ready?</strong>
                             </p>
-                            <Link to="/game/setup" className="btn-metro w-100">Play</Link>
+                            <Link to="/game/plan" className="btn-metro w-100">Play</Link>
                         </div>
 
                         {/* legend */}
@@ -102,27 +105,27 @@ function Map() {
                             <ul className="legend-list">
                                 <li className="legend-item">
                                     <div className="legend-dot line-purple"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Purple</span>
+                                    <span className="font-mono-custom small text-uppercase">Purple Line</span>
                                 </li>
                                 <li className="legend-item">
                                     <div className="legend-dot line-blue"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Blue</span>
+                                    <span className="font-mono-custom small text-uppercase">Blue Line</span>
                                 </li>
                                 <li className="legend-item">
                                     <div className="legend-dot line-green"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Green</span>
+                                    <span className="font-mono-custom small text-uppercase">Green Line</span>
                                 </li>
                                 <li className="legend-item">
                                     <div className="legend-dot line-yellow"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Yellow</span>
+                                    <span className="font-mono-custom small text-uppercase">Yellow Line</span>
                                 </li>
                                 <li className="legend-item">
                                     <div className="legend-dot line-orange"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Orange</span>
+                                    <span className="font-mono-custom small text-uppercase">Orange Line</span>
                                 </li>
                                 <li className="legend-item">
                                     <div className="legend-dot line-red"></div>
-                                    <span className="font-mono-custom small text-uppercase">Line Red</span>
+                                    <span className="font-mono-custom small text-uppercase">Red Line</span>
                                 </li>
                             </ul>
                         </div>

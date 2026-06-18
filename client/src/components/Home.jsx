@@ -14,7 +14,6 @@ function Home(props) {
                         {props.loggedIn ?
                             <>
                                 <Link to="/game/setup" className="btn-metro me-2"><i className="bi bi-play-fill me-2"></i>Play</Link>
-                                <Link to="/map" className="btn-metro-outline me-2"><i className="bi bi-map me-2"></i>Map</Link>
                                 <Link to="/ranking" className="btn-metro-outline"><i className="bi bi-trophy me-2"></i>Ranking</Link>
                             </> :
                             <Link to="/login" className="btn-metro">Login to Start</Link>
@@ -90,7 +89,7 @@ function Home(props) {
                         <Link to="/game/setup" className="btn-metro"><i className="bi bi-play-fill me-2"></i>Start Game</Link> :
                         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
                             <p className="text-muted-custom small m-0">
-                                Authentication required. Access the system to unlock the transit network map.
+                                Authentication required. Login to unlock the transit network map.
                             </p>
                             <Link to="/login" className="btn-metro-outline px-4">Sign In</Link>
                         </div>

@@ -216,30 +216,3 @@ function SubmitButton(props) {
         </Button>
     );
 }
-
-export function GameSetup() {
-    return(
-        <div className="page-center page-enter">
-            <div className="metro-card home-container text-center p-4 p-md-5 w-50" > 
-                <i className="bi bi-train-front display-1 text-accent mb-3 d-block opacity-75"></i>
-                <h2 className="font-mono-custom text-uppercase mb-3">READY?</h2>
-                
-                <div className="text-muted-custom mb-4 text-start">
-                    <p>Upon activation, you will have exactly <strong className="text-accent">90 seconds</strong> to find the correct route.</p>
-                    <p>Are you ready to play, or do you need to review the <strong className="text-accent">network map</strong> first?</p>
-                </div>
-
-                <div className="border-bottom border-urban mb-4"></div>
-
-                <div className="d-flex flex-column gap-3">
-                    <Link to="/game/plan" className="btn-metro w-100 py-3 fw-bold">
-                        <i className="bi bi-play-fill me-2"></i> START NEW GAME
-                    </Link>
-                    <Link to="/map" className="btn-metro-outline w-100">
-                        <i className="bi bi-map me-2"></i> REVIEW MAP
-                    </Link>
-                </div>
-            </div>
-        </div>
-    );
-}
