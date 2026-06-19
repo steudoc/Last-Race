@@ -150,12 +150,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.line-purple { background-color: #6b21a8; }
-.line-blue   { background-color: #1e40af; }
-.line-green  { background-color: #065f46; }
-.line-yellow { background-color: #854d0e; }
-.line-orange { background-color: #9a3412; }
-.line-red    { background-color: #991b1b; }
+.line-purple { background-color: #a855f7; }
+.line-blue { background-color: #3b82f6; }
+.line-green { background-color: #22c55e; }
+.line-yellow { background-color: #eab308; }
+.line-orange { background-color: #f97316; }
+.line-red { background-color: #ef4444; }
 
 .error-card {
   width: 100%;
