@@ -19,7 +19,6 @@ import './styles/Home.css';
 import './styles/AuthComponents.css';
 import './styles/Ranking.css';
 import "./styles/Map.css";
-import "./styles/SVG.css";
 import "./styles/GamePlan.css";
 import "./styles/GameExecute&Result.css";
 

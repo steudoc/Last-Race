@@ -72,6 +72,7 @@ export const getConnections = () => {
             JOIN line_stations LS2 ON LS2.line_id = LS1.line_id AND LS2.position = LS1.position + 1
             JOIN stations S1 ON S1.id = LS1.station_id
             JOIN stations S2 ON S2.id = LS2.station_id
+            ORDER BY RANDOM()
         `;
         db.all(sql, [], (err, rows) => {
             if (err) {
