@@ -107,24 +107,56 @@ export function GameResult() {
 
     if (!state?.gameResult) return <Navigate to='/notFound' />
     const { gameResult } = state;
+    const isValid = gameResult.valid;
 
     return(
-        <div className="page-center page-enter">
-            <div className="metro-card home-container" >
-                <div className="segments-panel justify-content-center text-center">
-                    <h3 className="font-mono-custom text-uppercase text-accent mb-2">RESULT</h3>
-                    <p className="text-muted-custom font-mono-custom mb-5">Data validated by server.</p>
-                    
-                    <div className="mb-5">
-                        <p className="font-mono-custom text-uppercase small text-muted-custom mb-1">COINS COLLECTED</p>
-                        <div className="display-3 font-mono-custom fw-bold" style={{ color: '#eab308' }}>
-                            {gameResult.finalScore} ¢
-                        </div>
+        <div className="metro-card home-container" >
+            <Row className="mb-4 align-items-center border-bottom border-urban pb-3 m-0">
+                <Col className="d-flex align-items-center gap-3 p-0">
+                    <div className="text-accent display-6 lh-1"><i className="bi bi-trophy"></i></div>
+                    <div>
+                        <div className="text-mono font-mono-custom fw-bold small lh-1">PHASE 04</div>
+                        <h3 className="text-uppercase m-0 fs-5">Result</h3>
                     </div>
-                    
-                    <Link to="/ranking" className="btn-metro w-100 mb-3">VIEW STANDINGS</Link>
-                    <Link to="/" className="btn-metro-outline w-100">RETURN TO HOME</Link>
+                </Col>
+            </Row>
+
+            <div className="text-center">
+                <div className="mb-5">
+                    {isValid ? (
+                        <div className="status-valid page-enter">
+                            <i className="bi bi-check-circle-fill display-2 d-block mb-3"></i>
+                            <h2 className="font-mono-custom text-uppercase mb-1">Correct route</h2>
+                            <p className="text-muted-custom small m-0">All connections successfully verified.</p>
+                        </div>
+                    ) : (
+                        <div className="status-invalid page-enter">
+                            <i className="bi bi-x-octagon-fill display-2 d-block mb-3"></i>
+                            <h2 className="font-mono-custom text-uppercase mb-1">Invalid route</h2>
+                            <p className="text-muted-custom small m-0">The submitted sequence was invalid or incomplete.</p>
+                        </div>
+                    )}
                 </div>
+
+                <div className="score-display-box mb-5">
+                    <p className="font-mono-custom text-uppercase small text-muted-custom mb-2">FINAL RESULT</p>
+                    <div className={`display-1 font-mono-custom fw-bold lh-1 ${isValid ? 'score-valid' : 'score-invalid'}`}>
+                        {gameResult.finalScore} <i class="bi bi-coin"></i>
+                    </div>
+                </div>
+
+                <Row className="g-3 m-0">
+                    <Col xs={12} sm={6} className="p-0 pe-sm-2">
+                        <Link to="/ranking" className="btn-metro w-100 d-inline-block">
+                            <i className="bi bi-list-ol me-2"></i>VIEW STANDINGS
+                        </Link>
+                    </Col>
+                    <Col xs={12} sm={6} className="p-0 ps-sm-2">
+                        <Link to="/" className="btn-metro-outline w-100 d-inline-block">
+                            <i className="bi bi-house-door me-2"></i>RETURN HOME
+                        </Link>
+                    </Col>
+                </Row>
             </div>
         </div>
     );
