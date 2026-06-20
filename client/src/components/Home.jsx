@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 function Home(props) {
     return (
-        <div className="metro-card home-container">
+        <div className="metro-card home-container m-5">
             <Row className="home-hero align-items-center mb-5 pb-4 g-4">
                 <Col xs={12} md={8}>
                     <p className="text-accent text-uppercase fw-bold small mb-1">Metro Network Game</p>

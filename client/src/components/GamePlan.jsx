@@ -93,26 +93,22 @@ function GamePlan() {
     // loading rendering 
     if (loading) {
         return (
-            <Container className="page-center page-enter d-flex justify-content-center align-items-center">
-                <Alert className="metro-alert metro-alert-warning text-center py-5" style={{width: '100%', maxWidth: '600px'}}>
-                    <Spinner animation="border" className="me-3" size="sm"/>
-                    LOADING...
-                </Alert>
-            </Container>
+            <Alert className="metro-alert metro-alert-warning text-center py-5" style={{width: '100%', maxWidth: '600px'}}>
+                <Spinner animation="border" className="me-3" size="sm"/>
+                LOADING...
+            </Alert>
         );
     }
 
     // error rendering
     if (error) {
         return (
-            <Container className="page-center page-enter d-flex justify-content-center align-items-center">
-                <Alert className="metro-alert metro-alert-danger text-center py-5" style={{width: '100%', maxWidth: '600px'}}>
-                    <i className="bi bi-exclamation-triangle-fill me-2"></i> {error}
-                    <div className="mt-4">
-                        <Link to="/" className="btn-metro-outline">RETURN TO HOME</Link>
-                    </div>
-                </Alert>
-            </Container>
+            <Alert className="metro-alert metro-alert-danger text-center py-5" style={{width: '100%', maxWidth: '600px'}}>
+                <i className="bi bi-exclamation-triangle-fill me-2"></i> {error}
+                <div className="mt-4">
+                    <Link to="/" className="btn-metro-outline">RETURN TO HOME</Link>
+                </div>
+            </Alert>
         );
     }
 
