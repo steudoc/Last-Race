@@ -154,9 +154,12 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
     const result = connections.map(conn => {
       const event = events[Math.floor(Math.random() * events.length)];
       coins = Math.max(0, coins + event.effect);
+
+      const fromName = validConnections.find(c => c.id1 === conn.id1)?.name1;
+
       return {
-        fromName: validConnections.find(c => c.id1 === conn.fromId)?.name1,
-        toName: validConnections.find(c => c.id2 === conn.toId)?.name2,
+        fromName,
+        toName: validConnections.find(c => c.id2 === conn.id2)?.name2,
         event: event.description,
         effect: event.effect,
         coinsAfter: coins,

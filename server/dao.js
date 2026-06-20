@@ -112,7 +112,7 @@ export const getRandomGameStations = () => {
             for (let i = 0; i < stationIds.length; i++) {
                 for (let j = i + 1; j < stationIds.length; j++) {
                     const dist = bfs(stationIds[i], stationIds[j], graph);
-                    if (dist >= 3 && isFinite(dist)) { // checks that the two stations are reachable with dist < 3
+                    if (dist >= 3 && isFinite(dist)) { // checks that the two stations are reachable with dist > 3
                         validPairs.push({
                             startId: stationIds[i],
                             endId: stationIds[j],
