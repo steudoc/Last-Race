@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
-import { ProgressBar } from "react-bootstrap";
+import { Alert, Container, ProgressBar } from "react-bootstrap";
 
 export function GameExecute() {
     const { state } = useLocation();
@@ -14,7 +14,7 @@ export function GameExecute() {
         if (!gameResult.valid) {  // check
             const timer = setTimeout(() => {
                 navigate('/game/result', { state: { gameResult } });
-            }, 5000);   // 5 secs
+            }, 4000);   // 4 secs
             return () => clearTimeout(timer);
         }
 
@@ -24,22 +24,25 @@ export function GameExecute() {
             } else {
                 navigate('/game/result', { state: { gameResult } });
             }
-        }, 5000);
+        }, 4000);
 
         return () => clearTimeout(timer);
     }, [currentIndex, gameResult]);
 
     if (!gameResult.valid) {
         return (
-            <div className="page-center page-enter">
-                <div className="metro-card result-card text-center">
-                    <span className="eyebrow">Invalid route</span>
-                    <h2 className="mb-3">Route rejected</h2>
-                    <p className="text-muted-custom text-sm">
-                        Your route was  invalid or incomplete.
-                    </p>
+            <Alert className="metro-alert metro-alert-danger text-center py-5 w-100 shadow-lg">
+                <div className="mb-4">
+                    <i className="bi bi-x-octagon-fill display-1 text-danger"></i>
                 </div>
-            </div>
+                <span className="text-muted-custom font-mono-custom small fw-bold mb-1 d-block">
+                    INVALID ROUTE
+                </span>
+                <h2 className="mb-3 text-uppercase">Route Rejected</h2>
+                <p className="text-white mb-0">
+                    The submitted sequence was invalid or incomplete. <br/>
+                </p>
+            </Alert>
         )
     }
 

@@ -7,7 +7,7 @@ function DefaultLayout(props) {
     return(
         <>
             <NavHeader loggedIn={props.loggedIn} handleLogout={props.handleLogout} />
-            <Container fluid>
+            <Container fluid className="page-center page-enter d-flex justify-content-center align-items-center p-3">
                 {props.message && <Row className="d-flex justify-content-center mt-3">
                     <Col className="col-8">
                         <Alert variant={props.message.type} onClose={() => props.setMessage("")} dismissible>
@@ -15,9 +15,7 @@ function DefaultLayout(props) {
                         </Alert>
                     </Col>   
                 </Row>}
-                <Row className="d-flex justify-content-center">
-                    <Outlet />
-                </Row>
+                <Outlet />
             </Container>
         </>
     );

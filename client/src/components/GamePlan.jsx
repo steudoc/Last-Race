@@ -118,94 +118,92 @@ function GamePlan() {
 
     // game 
     return (
-        <Container fluid="xl" className="page-center page-enter py-3 d-flex flex-column">
-            <div className="metro-card m-3 d-flex flex-column">
-                <Row className="align-items-center m-0 w-100 mb-4">
-                    <Col xs={12} lg={8} className="d-flex flex-column flex-md-row align-items-md-center gap-4">
-                        <div className="d-flex align-items-center gap-3 pe-md-4 border-end-md border-urban">
-                            <div className="text-accent display-6 lh-1"><i className="bi bi-clock"></i></div>
-                            <div>
-                                <div className="text-mono font-mono-custom fw-bold small lh-1">PHASE 02</div>
-                                <h3 className="text-uppercase m-0 fs-5">Planning</h3>
-                            </div>
-                        </div>
-
+        <div className="metro-card m-3 d-flex flex-column">
+            <Row className="align-items-center m-0 w-100 mb-4">
+                <Col xs={12} lg={8} className="d-flex flex-column flex-md-row align-items-md-center gap-4">
+                    <div className="d-flex align-items-center gap-3 pe-md-4 border-end-md border-urban">
+                        <div className="text-accent display-6 lh-1"><i className="bi bi-clock"></i></div>
                         <div>
-                            <p className="text-muted-custom font-mono-custom small fw-bold mb-1">ROUTE ASSIGNED</p>
-                            <div className="mission-target">
-                                <span className="target-station">{startStation?.name}</span>
-                                <i className="bi bi-arrow-right text-secondary mx-2"></i>
-                                <span className="target-station">{endStation?.name}</span>
-                            </div>
+                            <div className="text-mono font-mono-custom fw-bold small lh-1">PHASE 02</div>
+                            <h3 className="text-uppercase m-0 fs-5">Planning</h3>
                         </div>
-                    </Col>
-                    <Col xs={12} lg={4}>
-                        <div className="timer-box w-100 text-lg-end">
-                            <p className="text-muted-custom font-mono-custom small fw-bold mb-1 m-0">REMAINING TIME</p>
-                            <div className={`timer-value ${timeLeft <= 15 ? 'text-danger' : ''}`} style={timeLeft > 15 ? {color: "var(--accent)", textShadow: "0 0 12px rgba(255, 87, 34, 0.5)"} : {}}>
-                                {formatTime(timeLeft)}
-                            </div>
+                    </div>
+
+                    <div>
+                        <p className="text-muted-custom font-mono-custom small fw-bold mb-1">ROUTE ASSIGNED</p>
+                        <div className="mission-target">
+                            <span className="target-station">{startStation?.name}</span>
+                            <i className="bi bi-arrow-right text-secondary mx-2"></i>
+                            <span className="target-station">{endStation?.name}</span>
                         </div>
-                    </Col>
-                </Row>
-
-                <Row className="g-4 flex-grow-1 align-items-stretch">
-                    {/* map */}
-                    <Col xs={12} lg={5} xl={4} className="d-flex">
-                        <div className="map-display p-2 w-100 h-100 d-flex justify-content-center align-items-center">
-                            <Image src={mapImage} fluid alt="Metro Network Map" className="map-image-content" />
+                    </div>
+                </Col>
+                <Col xs={12} lg={4}>
+                    <div className="timer-box w-100 text-lg-end">
+                        <p className="text-muted-custom font-mono-custom small fw-bold mb-1 m-0">REMAINING TIME</p>
+                        <div className={`timer-value ${timeLeft <= 15 ? 'text-danger' : ''}`} style={timeLeft > 15 ? {color: "var(--accent)", textShadow: "0 0 12px rgba(255, 87, 34, 0.5)"} : {}}>
+                            {formatTime(timeLeft)}
                         </div>
-                    </Col>
+                    </div>
+                </Col>
+            </Row>
 
-                    {/* game board */}
-                    <Col xs={12} lg={7} xl={8} className="d-flex">
-                        <div className="segments-panel w-100 h-100 d-flex flex-column">
-                            <Row className="h-100 g-3">
-                                <Col xs={12} md={5} className="d-flex flex-column h-100">
-                                    <p className="font-mono-custom small text-accent mb-2">SELECTED ROUTE</p>
-                                    <div className="current-route-box flex-grow-1 align-content-start overflow-auto">
-                                        {selectedSegments.length === 0 ? (
-                                            <span className="text-muted-custom font-mono-custom small w-100 text-center mt-3">AWAITING STATIONS...</span>
-                                        ) : (
-                                            selectedSegments.map(segment => {
-                                                const segmentId = `${segment.id1}-${segment.id2}`; 
-                                                return (
-                                                    <div key={segmentId} className="route-chip w-100 mb-2">
-                                                        <span className="text-truncate">{segment.name1} - {segment.name2}</span>
-                                                        <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
-                                                            <i className="bi bi-x fs-5" />
-                                                        </button>
-                                                    </div>
-                                                );
-                                            })
-                                        )}
-                                    </div>
-                                </Col>
+            <Row className="g-4 flex-grow-1 align-items-stretch">
+                {/* map */}
+                <Col xs={12} lg={5} xl={4} className="d-flex">
+                    <div className="map-display p-2 w-100 h-100 d-flex justify-content-center align-items-center">
+                        <Image src={mapImage} fluid alt="Metro Network Map" className="map-image-content" />
+                    </div>
+                </Col>
 
-                                <Col xs={12} md={7} className="d-flex flex-column h-100">
-                                    <p className="font-mono-custom small text-accent border-bottom border-urban pb-2 mb-3">
-                                        AVAILABLE SEGMENTS ({connections.length})
-                                    </p>
-                                    
-                                    <div className="segment-list flex-grow-1 mb-3">
-                                        {connections.map(segment => {
-                                            const segmentId = `${segment.id1}-${segment.id2}`;
-                                            const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
-
-                                            return(
-                                                <Segment key={segmentId} segmentId={segmentId} isSelected={isSelected} isSubmitted={isSubmitted} segment={segment} handleAddSegment={handleAddSegment}/>
+                {/* game board */}
+                <Col xs={12} lg={7} xl={8} className="d-flex">
+                    <div className="segments-panel w-100 h-100 d-flex flex-column">
+                        <Row className="h-100 g-3">
+                            <Col xs={12} md={5} className="d-flex flex-column h-100">
+                                <p className="font-mono-custom small text-accent mb-2">SELECTED ROUTE</p>
+                                <div className="current-route-box flex-grow-1 align-content-start overflow-auto">
+                                    {selectedSegments.length === 0 ? (
+                                        <span className="text-muted-custom font-mono-custom small w-100 text-center mt-3">AWAITING STATIONS...</span>
+                                    ) : (
+                                        selectedSegments.map(segment => {
+                                            const segmentId = `${segment.id1}-${segment.id2}`; 
+                                            return (
+                                                <div key={segmentId} className="route-chip w-100 mb-2">
+                                                    <span className="text-truncate">{segment.name1} - {segment.name2}</span>
+                                                    <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
+                                                        <i className="bi bi-x fs-5" />
+                                                    </button>
+                                                </div>
                                             );
-                                        })}
-                                    </div>
+                                        })
+                                    )}
+                                </div>
+                            </Col>
 
-                                    <SubmitButton isSubmitted={isSubmitted} handleSubmitRoute={handleSubmitRoute} />
-                                </Col>
-                            </Row>
-                        </div>
-                    </Col>
-                </Row>
-            </div>
-        </Container>
+                            <Col xs={12} md={7} className="d-flex flex-column h-100">
+                                <p className="font-mono-custom small text-accent border-bottom border-urban pb-2 mb-3">
+                                    AVAILABLE SEGMENTS ({connections.length})
+                                </p>
+                                
+                                <div className="segment-list flex-grow-1 mb-3">
+                                    {connections.map(segment => {
+                                        const segmentId = `${segment.id1}-${segment.id2}`;
+                                        const isSelected = selectedSegments.some(s => s.id1 === segment.id1 && s.id2 === segment.id2);
+
+                                        return(
+                                            <Segment key={segmentId} segmentId={segmentId} isSelected={isSelected} isSubmitted={isSubmitted} segment={segment} handleAddSegment={handleAddSegment}/>
+                                        );
+                                    })}
+                                </div>
+
+                                <SubmitButton isSubmitted={isSubmitted} handleSubmitRoute={handleSubmitRoute} />
+                            </Col>
+                        </Row>
+                    </div>
+                </Col>
+            </Row>
+        </div>
     );
 }
 
