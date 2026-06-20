@@ -49,15 +49,17 @@ function GamePlan() {
     //submit
     const handleSubmitRoute = async () => {
         setIsSubmitted(true);
-        setLoading(true);
         try {
             const gameResult = await API.executeGame(selectedSegments, startStation.id, endStation.id);
-            navigate('/game/execute', { state: { gameResult } });
+            if (gameResult.valid) {
+                navigate('/game/execute', { state: { gameResult } });
+            } else {
+                navigate('/game/result', { state: { gameResult } });
+            }
         } catch(err) {
             console.warn(err);
-            setError("ERROR: DATA REJECTED BY THE SERVER.");
+            setError("ERROR: FAILED TO PROCESS DATA.");
         }
-        setLoading(false);
     }
 
     // time
@@ -167,7 +169,7 @@ function GamePlan() {
                                             return (
                                                 <div key={segmentId} className="route-chip w-100 mb-2">
                                                     <span className="text-truncate">{segment.name1} - {segment.name2}</span>
-                                                    <button className="route-chip-remove" onClick={() => handleAddSegment(segment)}>
+                                                    <button className="route-chip-remove" onClick={() => handleAddSegment(segment)} disabled={isSubmitted}>
                                                         <i className="bi bi-x fs-5" />
                                                     </button>
                                                 </div>

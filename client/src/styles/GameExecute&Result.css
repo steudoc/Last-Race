@@ -87,38 +87,6 @@
   text-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
 }
 
-.score-display-box {
-  background-color: var(--bg-input, #0b0d14);
-  border: 1px dashed var(--border-urban, #333);
-  border-radius: var(--radius-button, 4px);
-  padding: 2rem 1.5rem;
-  position: relative;
-}
-
-/* Decorazione angolare per il box del punteggio in stile cyber */
-.score-display-box::before,
-.score-display-box::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--border-concrete, #555);
-}
-
-.score-display-box::before {
-  top: -1px;
-  left: -1px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.score-display-box::after {
-  bottom: -1px;
-  right: -1px;
-  border-left: none;
-  border-top: none;
-}
-
 .score-valid {
   color:  #eab308;
   text-shadow: 0 0 20px rgba(234, 179, 8, 0.4);

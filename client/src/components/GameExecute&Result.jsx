@@ -138,9 +138,9 @@ export function GameResult() {
                     )}
                 </div>
 
-                <div className="score-display-box mb-5">
+                <div className="mb-4">
                     <p className="font-mono-custom text-uppercase small text-muted-custom mb-2">FINAL RESULT</p>
-                    <div className={`display-1 font-mono-custom fw-bold lh-1 ${isValid ? 'score-valid' : 'score-invalid'}`}>
+                    <div className="display-1 font-mono-custom fw-bold lh-1 score-valid">
                         {gameResult.finalScore} <i class="bi bi-coin"></i>
                     </div>
                 </div>
