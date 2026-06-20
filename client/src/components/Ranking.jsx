@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../API/API";
-import { Alert, Spinner, Table } from "react-bootstrap";
+import { Alert, Spinner, Table, Row, Col } from "react-bootstrap";
 import { Link } from "react-router";
 
 function Ranking() {
@@ -24,76 +24,78 @@ function Ranking() {
     }, []);
 
     const getMedal = (index) => {
-        if (index === 0) return "🥇";
-        if (index === 1) return "🥈";
-        if (index === 2) return "🥉";
+        if (index === 0) return <span className="fs-3 lh-1">🥇</span>;
+        if (index === 1) return <span className="fs-4 lh-1">🥈</span>;
+        if (index === 2) return <span className="fs-5 lh-1">🥉</span>;
         
         const num = index + 1;
-        return `[ ${num < 10 ? '0' + num : num} ]`;
+        return <span className="font-mono-custom text-muted-custom">[{num < 10 ? '0' + num : num}]</span>;
     };
 
     return (
-        <div className="page-center page-enter">
-            <div className="metro-card ranking-card">
-                <div className="text-center mb-5">
+        <div className="metro-card ranking-card shadow-lg w-100">
+            <Row className="mb-4 text-center border-bottom border-urban pb-4">
+                <Col>
+                    <i className="bi bi-globe display-4 text-accent mb-3 d-block"></i>
                     <p className="text-accent font-mono-custom small fw-bold mb-1">
                         GLOBAL STANDINGS
                     </p>
                     <h2 className="login-title mb-2">Leaderboard</h2>
-                    <p className="text-muted-custom font-mono-custom">
+                    <p className="text-muted-custom font-mono-custom m-0">
                         Top scores of Last Race game
                     </p>
+                </Col>
+            </Row>
+
+            {/* loading state */}
+            {loading && (
+                <Alert className="metro-alert metro-alert-warning text-center my-5 py-4 w-100 mx-auto">
+                    <Spinner animation="border" size="sm" className="me-3"/>
+                    LOADING DATA...
+                </Alert>
+            )}
+
+            {/* err state */}
+            {error && (
+                <Alert className="metro-alert metro-alert-danger text-center my-5 py-4 w-100 mx-auto">
+                    <i className="bi bi-exclamation-triangle-fill me-2"></i> {error}
+                </Alert>
+            )}
+
+            {/* empty leaderboard */}
+            {!loading && !error && rankingList.length === 0 && (
+                <Alert className="metro-alert text-center my-4 py-3 text-muted-custom">
+                    No scores recorder yet. Be the first to play!
+                </Alert>
+            )}
+
+            {/* scores */}
+            {!loading && !error && rankingList.length > 0 && (
+                <div className="table-responsive mb-4 px-md-3">
+                    <Table className="metro-table align-middle" borderless>
+                        <thead>
+                            <tr className="border-bottom border-urban">
+                                <th className="text-center col-rank">Rank</th>
+                                <th className="col-player">User</th>
+                                <th className="text-end col-score">Best Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rankingList.map((player, index) => (
+                                <RankEntry key={player.id} getMedal={getMedal} index={index} player={player} />
+                            ))}
+                        </tbody>
+                    </Table>
                 </div>
+            )}
 
-                {/* loading state */}
-                {loading && (
-                    <Alert className="metro-alert metro-alert-warning text-center my-5 py-4">
-                        <span className="spinner-border spinner-border-sm me-3" role="status" aria-hidden="true"></span>
-                        LOADING DATA... PLEASE WAIT
-                    </Alert>
-                )}
-
-                {/* err state */}
-                {error && (
-                    <Alert className="metro-alert metro-alert-danger text-center my-4 py-3">
-                        {error}
-                    </Alert>
-                )}
-
-                {/* empty leaderboard */}
-                {!loading && !error && rankingList.length === 0 && (
-                    <Alert className="metro-alert text-center my-4 py-3 text-muted-custom">
-                        No scores recorder yet. Be the first to play!
-                    </Alert>
-                )}
-
-                {/* scores */}
-                {!loading && !error && rankingList.length > 0 && (
-                    <div className="table-responsive mb-4">
-                        <Table className="metro-table" borderless>
-                            <thead>
-                                <tr>
-                                    <th className="text-center col-rank">Rank</th>
-                                    <th className="col-player">User</th>
-                                    <th className="text-end col-score">Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rankingList.map((player, index) => (
-                                    <RankEntry key={player.id} getMedal={getMedal} index={index} player={player} />
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
-                )}
-
-                <div className="d-flex justify-content-center mt-5">
+            <Row className="border-top border-urban pt-4">
+                <Col className="d-flex justify-content-center">
                     <Link to="/" className="btn-metro w-100 text-center">
-                        Back to Home
+                        <i className="bi bi-house-door me-2"></i>Back to Home
                     </Link>
-                </div>
-                
-            </div>
+                </Col>
+            </Row>
         </div>
     );
 }

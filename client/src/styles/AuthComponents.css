@@ -45,8 +45,8 @@
 }
 
 .metro-alert-warning {
-  color: var(--accent) !important;
-  border-color: var(--accent) !important;
+  color: #eab308 !important;         
+  border-color: #eab308 !important;  
 }
 
 .metro-alert-danger {
