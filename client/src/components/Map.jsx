@@ -19,8 +19,10 @@ function Map() {
                 {/* map layout */}
                 <Row className="g-4">
                     {/* map */}
-                    <Col xs={12} lg={8} xl={7} className="map-display p-2">
-                        <Image src={mapImage} fluid alt="Metro Network Map" className="map-image-content" />
+                    <Col xs={12} lg={8} xl={7} >
+                        <div className="map-display p-2">
+                            <Image src={mapImage} fluid alt="Metro Network Map" className="map-image-content" />
+                        </div>
                     </Col>
 
                     {/* sidebar */}

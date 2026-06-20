@@ -134,6 +134,7 @@ body {
   padding: 2rem 1rem;
 }
 
+.text-mono { color: var(--text-mono); }
 .text-accent { color: var(--accent); }
 .text-muted-custom { color: var(--text-secondary); }
 
