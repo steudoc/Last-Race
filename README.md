@@ -4,10 +4,12 @@
 
 ## React Client Application Routes
 
-- Route `/`: landing page  with game instructions, visible to all users (including anonymous). Contains a link to the login page.
-- Route `/login`: login form. Redirects to `/map` on success.
-- Route `/map`: setup phase. Shows the full metro network map with lines, stations and connections. Only accessible to authenticated users, otherwise redirects to `/`.
-- Route `/game`: planning, execution and result phases. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/`: landing page with game instructions, visible to all users (including anonymous). Contains a link to the login page.
+- Route `/login`: login form. Redirects to `/` on success.
+- Route `/game/setup`: setup phase. Shows the full metro network map with lines, stations and connections. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/game/plan`: planning phase. The player builds a route from the assigned start to end station within 90 seconds. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/game/execute`: execution phase. Shows each leg of the journey one at a time, automatically, with its random event and updated coin total. Only accessible to authenticated users, otherwise redirects to `/`.
+- Route `/game/result`: result phase. Shows the final score and the option to play again or view the ranking. Only accessible to authenticated users, otherwise redirects to `/`.
 - Route `/ranking`: ranking board showing all users and their best score, ordered by best score descending. Only accessible to authenticated users, otherwise redirects to `/`.
 
 ## API Server
@@ -209,5 +211,5 @@ GET `/api/ranking`
 | Silve         | password |
 
 ## Use of AI Tools
-Briefly describe whether you used any AI tools (e.g., ChatGPT, GitHub Copilot, Claude) while working on this project, for which purposes (e.g., clarifying concepts, debugging, generating code), and how you verified or adapted their output.
-If you did not use any AI tools, simply state so.
+I used Gemini mainly for harmonizing the look of the application and apply it consistently across all components. I have also used it to help me identifying and fixing bugs during development.
+I wrote the core application logic myself, and used AI as a support tool for styling decisions and debugging specific errors. Especially for error resolution, I verified that every suggestion provided by the AI was correct (by comparing it with course topics or documentation) and that it met best practices. I almost always took inspiration from Gemini's suggestion to develop my own solution that was more suited to the context of my application
