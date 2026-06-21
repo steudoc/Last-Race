@@ -1,5 +1,4 @@
 /* Data Access Object (DAO) for accessing database*/
-
 import sqlite from "sqlite3";
 import crypto from "crypto";
 import { Line, Station, Event } from './models.js'

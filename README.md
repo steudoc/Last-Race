@@ -182,15 +182,14 @@ GET `/api/ranking`
 
 ## Main React Components
 
-- `Navbar` (in `Navbar.jsx`): navigation bar shown on all pages, contains links to routes and the logout button
-- `LoginForm` (in `LoginForm.jsx`): login form with username and password fields, handles the POST /api/session call and redirects on success
-- `MapSetup` (in `MapSetup.jsx`): setup page phase, renders the full metro network map with colored lines and connections. Contains the button to start the game
-- `GamePage` (in `GamePage.jsx`): container component for the game route, manages the current phase state (planning/execution/result) and the game data shared between phases
-- `PlanningPhase` (in `PlanningPhase.jsx`): planning phase, shows the 90-seconds countdown timer, the station-only map, the selectable connections list and the route being built
-- `ExecutionPhase` (in `ExecutionPhase.jsx`): execution phase, shows each connection one at a time with its random event and updated coin total
-- `ResultPhase` (in `ResultPhase.jsx`): result phase, shows the final score and the button to start a new game
+- `NavHeader` (in `NavHeader.jsx`): navigation bar shown on all pages, contains links to routes and the login/logout button
+- `LoginForm` (in `AuthComponents.jsx`): login form with username and password fields, handles the POST /api/session call and redirects on success
+- `Home` (in `Home.jsx`): landing page of the application, introduces the game rules, explains the four gameplay phases, and provides entry points to login or start a new game
+- `Map` (in `Map.jsx`): setup page phase, renders the full metro network map with colored lines and connections. Contains the button to start the game
+- `GamePlan` (in `GamePlan.jsx`): planning phase, shows the 90-seconds countdown timer, the station-only map, the selectable connections list and the route being built
+- `GameExecute` (in `GameExecute&Result.jsx`): execution phase, shows each connection one at a time with its random event and updated coin total
+- `GameResult` (in `GameExecute&Result.jsx`): result phase, shows the final score and the buttons to start a new game, see ranking or return to home.
 - `Ranking` (in `Ranking.jsx`): ranking page, shows a table with all users and their best score ordered descending
-- `MapDisplay` (in `MapDisplay.jsx`): reusable map component used both in MapSetup (full map with lines) and PlanningPhase (stations only)
 
 ## Screenshot
 

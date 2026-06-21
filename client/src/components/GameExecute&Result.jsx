@@ -11,20 +11,13 @@ export function GameExecute() {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        if (!gameResult.valid) {  // check
-            const timer = setTimeout(() => {
-                navigate('/game/result', { state: { gameResult } });
-            }, 4000);   // 4 secs
-            return () => clearTimeout(timer);
-        }
-
         const timer = setTimeout(() => {
             if (currentIndex < gameResult.connections.length - 1) {
                 setCurrentIndex(prev => prev + 1);
             } else {
                 navigate('/game/result', { state: { gameResult } });
             }
-        }, 4000);
+        }, 5000);
 
         return () => clearTimeout(timer);
     }, [currentIndex, gameResult]);

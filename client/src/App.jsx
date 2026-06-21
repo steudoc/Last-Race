@@ -21,7 +21,6 @@ import './styles/Ranking.css';
 import "./styles/Map.css";
 import "./styles/GamePlan.css";
 import "./styles/GameExecute&Result.css";
-import "./styles/DefaultLayout.css";
 
 function App() {
   const [user, setUser] = useState(undefined);

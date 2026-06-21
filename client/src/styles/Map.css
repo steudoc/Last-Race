@@ -6,7 +6,7 @@
 }
 
 .map-display {
-  background-color: #0b0d14; /* Nero profondissimo */
+  background-color: #0b0d14;
   border: 2px solid var(--border-urban);
   border-radius: var(--radius-button);
 }

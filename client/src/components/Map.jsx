@@ -26,7 +26,7 @@ function Map() {
 
                 {/* sidebar */}
                 <Col xs={12} lg={4} xl={5} className="d-flex flex-column gap-3">
-                    <div className="phase-card w-100 flex-grow-0 p-4">
+                    <div className="phase-card w-100 p-4">
                         <div className="phase-number">01</div>
                         <div className="phase-icon"><i className="bi bi-map" /></div>
                         <h3 className="sidebar-section-title text-accent border-0 p-0 m-0 mb-3">Setup Phase</h3>
@@ -43,7 +43,7 @@ function Map() {
                     </div>
 
                     {/* legend */}
-                    <div className=" flex-grow-1 p-4">
+                    <div className="phase-card flex-grow-1 p-4">
                         <h3 className="sidebar-section-title">Active Lines</h3>
                         <ul className="legend-list d-flex flex-column">
                             <li className="legend-item">
