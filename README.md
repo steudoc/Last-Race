@@ -195,7 +195,8 @@ GET `/api/ranking`
 
 ## Screenshot
 
-![Screenshot](./img/screenshot.jpg)
+![Ranking](./img/ranking_img.png)
+![Gameplay](./img/gameplay_img.png)
 
 ## Users Credentials
 
@@ -209,6 +210,8 @@ GET `/api/ranking`
 | john.doe      | password |
 | julia         | password |
 | Silve         | password |
+
+Note: steudoc, osv, SimplePlayer and Silve have already played more than one game
 
 ## Use of AI Tools
 I used Gemini mainly for harmonizing the look of the application and apply it consistently across all components. I have also used it to help me identifying and fixing bugs during development.
