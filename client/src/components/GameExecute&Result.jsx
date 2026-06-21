@@ -17,7 +17,7 @@ export function GameExecute() {
             } else {
                 navigate('/game/result', { state: { gameResult } });
             }
-        }, 5000);
+        }, 5000); // 5 secs
 
         return () => clearTimeout(timer);
     }, [currentIndex, gameResult]);

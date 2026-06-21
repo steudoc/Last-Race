@@ -132,7 +132,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
   const startTime = dayjs(activeGame.startTime);
   const elapsedTime = now.diff(startTime, 'seconds');
 
-  const MAX_ALLOWED_TIME = 93; // 3 s margin for request/response delays
+  const MAX_ALLOWED_TIME = 94; // 4 s margin for request/response delays
   if(elapsedTime > MAX_ALLOWED_TIME) {
     req.session.activeGame = null;
     return res.json({ valid: false, finalScore: 0 });
