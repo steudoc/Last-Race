@@ -43,7 +43,7 @@ function Map() {
                     </div>
 
                     {/* legend */}
-                    <div className="phase-card flex-grow-1 p-4">
+                    <div className=" flex-grow-1 p-4">
                         <h3 className="sidebar-section-title">Active Lines</h3>
                         <ul className="legend-list d-flex flex-column">
                             <li className="legend-item">
