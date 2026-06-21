@@ -29,7 +29,7 @@ function Ranking() {
         if (index === 2) return <span className="fs-5 lh-1">🥉</span>;
         
         const num = index + 1;
-        return <span className="font-mono-custom text-muted-custom">[{num < 10 ? '0' + num : num}]</span>;
+        return <span className="font-mono-custom text-muted-custom">{num}</span>;
     };
 
     return (

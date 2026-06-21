@@ -80,13 +80,13 @@ export function GameExecute() {
                     <Col xs={6}>
                         <span className="text-muted-custom font-mono-custom small fw-bold d-block mb-1">EVENT EFFECT</span>
                         <div className={`execution-effect ${leg.effect > 0 ? 'effect-positive' : leg.effect < 0 ? 'effect-negative' : 'effect-neutral'}`}>
-                            {leg.effect > 0 ? `+${leg.effect}` : leg.effect} <i class="bi bi-coin"></i>
+                            {leg.effect > 0 ? `+${leg.effect}` : leg.effect} <i className="bi bi-coin"></i>
                         </div>
                     </Col>
                     <Col xs={6} className="text-end">
                         <span className="text-muted-custom font-mono-custom small fw-bold d-block mb-1">TOTAL BALANCE</span>
                         <div className="execution-total">
-                            {leg.coinsAfter} <i class="bi bi-coin"></i>
+                            {leg.coinsAfter} <i className="bi bi-coin"></i>
                         </div>
                     </Col>
                 </Row>
@@ -134,17 +134,22 @@ export function GameResult() {
                 <div className="mb-4">
                     <p className="font-mono-custom text-uppercase small text-muted-custom mb-2">FINAL RESULT</p>
                     <div className="display-1 font-mono-custom fw-bold lh-1 score-valid">
-                        {gameResult.finalScore} <i class="bi bi-coin"></i>
+                        {gameResult.finalScore} <i className="bi bi-coin"></i>
                     </div>
                 </div>
 
                 <Row className="g-3 m-0">
-                    <Col xs={12} sm={6} className="p-0 pe-sm-2">
+                    <Col xs={12} md={4} className="p-0 pe-sm-2">
+                        <Link to="/game/setup" className="btn-metro-outline w-100 d-inline-block">
+                            <i className="bi bi-play-fill me-2"></i>START NEW GAME
+                        </Link>
+                    </Col>
+                    <Col xs={12} md={4} className="p-0 px-sm-2">
                         <Link to="/ranking" className="btn-metro w-100 d-inline-block">
                             <i className="bi bi-list-ol me-2"></i>VIEW STANDINGS
                         </Link>
                     </Col>
-                    <Col xs={12} sm={6} className="p-0 ps-sm-2">
+                    <Col xs={12} md={4} className="p-0 ps-sm-2">
                         <Link to="/" className="btn-metro-outline w-100 d-inline-block">
                             <i className="bi bi-house-door me-2"></i>RETURN HOME
                         </Link>
