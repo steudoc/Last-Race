@@ -146,7 +146,7 @@ app.post("/api/game/execute", isLoggedIn, async (req, res) => {
     const isValid = validateRoute(connections, startId, endId, validConnections);
     if (!isValid) {
       await updateBestScore(req.user.id, 0);
-      return res.json({ valid: false, finalScore: 0 });
+      return res.json({ valid: false, finalScore: 0 });   // the check is done db query
     }
 
     // apply random events
