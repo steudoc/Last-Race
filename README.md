@@ -1,5 +1,9 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/iZes9Qfg)
-# Exam #1: "Ultima corsa"
+# Last Race
+![Cover](./cover.png)
+
+## Description
+"Last Race" is a web-based game where players test their memory and luck abilities by guessing the right subway route from start to end station. Each leg of the route is affected by a random event.
+
 ## Student: s358440 TALLONE STEFANO 
 
 ## React Client Application Routes
