@@ -2,7 +2,7 @@
 ![Cover](./cover.png)
 
 ## Description
-"Last Race" is a web-based game where players test their memory and luck abilities by guessing the right subway route from start to end station. Each leg of the route is affected by a random event.
+**Last Race** is an interactive, web-based strategy and memory game developed for the **Web Applications I** course during my Master's Degree in Computer Engineering at **Politecnico di Torino**. Players put their navigation intuition, memory, and luck to the test by guessing the correct subway route from a starting station to their final destination. Along each leg of the journey, real-time random events influence the commute, demanding strategic decision-making and route adaptation.
 
 ## Student: s358440 TALLONE STEFANO 
 
@@ -220,3 +220,17 @@ Note: steudoc, osv, SimplePlayer and Silve have already played more than one gam
 ## Use of AI Tools
 I used Gemini mainly for harmonizing the look of the application and apply it consistently across all components. I have also used it to help me identifying and fixing bugs during development.
 I wrote the core application logic myself, and used AI as a support tool for styling decisions and debugging specific errors. Especially for error resolution, I verified that every suggestion provided by the AI was correct (by comparing it with course topics or documentation) and that it met best practices. I almost always took inspiration from Gemini's suggestion to develop my own solution that was more suited to the context of my application
+
+## How to run
+First terminal:
+```
+cd server
+npm install
+nodemon index.js  # or: node index.js
+```
+Second terminal:
+```
+cd client
+npm install
+npm run dev
+```
